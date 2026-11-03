@@ -215,19 +215,17 @@ class Trek:
 
         self.waiting_list.append(traveler)
 
-    # Promotes the first waiting traveler by membership priority; anyone no longer available is skipped, and doing nothing is not an error
+    # Promotes a waiting traveler by membership type, then by order of arrival within the type; anyone no longer available is skipped, and doing nothing is not an error
     def promote_from_waiting_list(self):
         if not self.has_capacity() or self.has_departed():
             return
-        best=None
-        for traveler in self.waiting_list:
-            if traveler.is_available(self.start_date, self.duration_days):
-                # A strict comparison keeps arrival order within the same priority; a lower number comes first
-                if best is None or traveler.get_priority()<best.get_priority():
-                    best=traveler
-        if best is not None:
-            self.waiting_list.remove(best)
-            self.register(best)
+        # Assumption: premium comes before annual, and annual before basic
+        for membership_type in ("premium", "annual", "basic"):
+            for traveler in self.waiting_list:
+                if traveler.membership_type==membership_type and traveler.is_available(self.start_date, self.duration_days):
+                    self.waiting_list.remove(traveler)
+                    self.register(traveler)
+                    return
 
     # Sets confirmed or planned by the number of participants; a cancelled or completed trek never changes back
     def update_status(self):
