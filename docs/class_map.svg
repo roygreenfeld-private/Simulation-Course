@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" role="img" aria-label="Field Trek Agency class map: six classes and their 39 fields. Agency holds lists of travelers, guides and treks. Trek links both ways with Traveler and Guide. Equipment and Transport point to Trek, and Trek checks them only during set_dates.">
+<defs>
+<marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#22302a"/></marker>
+<marker id="headDash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9a4a12"/></marker>
+</defs>
+<rect width="1200" height="850" fill="#f3f6f2"/>
+<text x="40" y="42" font-size="24" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="700">Field Trek Agency: class map</text>
+<text x="40" y="66" font-size="13" fill="#5b6b63" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">6 classes and 39 fields, showing which fields connect the classes</text>
+<polyline points="460,160 180,160 180,318" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="320" y="150" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">travelers</text>
+<polyline points="740,160 1020,160 1020,318" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="880" y="150" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">guides</text>
+<polyline points="600,228 600,318" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="612" y="278" font-size="11" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">treks</text>
+<polyline points="460,395 322,395" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="390" y="368" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">participants</text>
+<text x="390" y="382" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">waiting_list</text>
+<polyline points="320,455 458,455" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="390" y="473" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">current_treks</text>
+<text x="390" y="487" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">completed_treks</text>
+<polyline points="740,395 878,395" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="810" y="382" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">guide</text>
+<polyline points="880,455 742,455" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="810" y="473" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">assigned_treks</text>
+<polyline points="320,615 458,615" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="390" y="587" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">loans</text>
+<text x="390" y="601" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">trek, quantity</text>
+<polyline points="460,648 322,648" fill="none" stroke="#9a4a12" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#headDash)"/>
+<text x="390" y="666" font-size="11" fill="#9a4a12" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">set_dates calls</text>
+<text x="390" y="680" font-size="11" fill="#9a4a12" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">can_supply</text>
+<polyline points="880,615 742,615" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="810" y="587" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">assignments</text>
+<text x="810" y="601" font-size="11" fill="#22302a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">trek, pickup_point</text>
+<polyline points="740,648 878,648" fill="none" stroke="#9a4a12" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#headDash)"/>
+<text x="810" y="666" font-size="11" fill="#9a4a12" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">set_dates calls</text>
+<text x="810" y="680" font-size="11" fill="#9a4a12" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">is_available</text>
+<rect x="460" y="90" width="280" height="138" rx="6" fill="#ffffff" stroke="#1f4d3a" stroke-width="1.5"/>
+<path d="M460 96 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#1f4d3a"/>
+<text x="474" y="116" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Agency</text>
+<text x="726" y="115" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">agency.py</text>
+<text x="474" y="149" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">name</text>
+<text x="726" y="149" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<rect x="461" y="156" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="171" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">travelers</text>
+<text x="726" y="171" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Traveler]</text>
+<rect x="461" y="178" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="193" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">guides</text>
+<text x="726" y="193" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Guide]</text>
+<rect x="461" y="200" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="215" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">treks</text>
+<text x="726" y="215" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Trek]</text>
+<rect x="460" y="320" width="280" height="336" rx="6" fill="#ffffff" stroke="#1f4d3a" stroke-width="1.5"/>
+<path d="M460 326 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#1f4d3a"/>
+<text x="474" y="346" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Trek</text>
+<text x="726" y="345" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">trek.py</text>
+<text x="474" y="379" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">trek_id</text>
+<text x="726" y="379" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="474" y="401" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">name</text>
+<text x="726" y="401" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="474" y="423" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">region</text>
+<text x="726" y="423" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="474" y="445" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">difficulty_level</text>
+<text x="726" y="445" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int 1-10</text>
+<text x="474" y="467" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">min_participants</text>
+<text x="726" y="467" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="474" y="489" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">max_participants</text>
+<text x="726" y="489" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="474" y="511" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">start_date</text>
+<text x="726" y="511" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">date</text>
+<text x="474" y="533" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">duration_days</text>
+<text x="726" y="533" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="474" y="555" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">price</text>
+<text x="726" y="555" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int or float</text>
+<rect x="461" y="562" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="577" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">guide</text>
+<text x="726" y="577" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">Guide or None</text>
+<rect x="461" y="584" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="599" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">participants</text>
+<text x="726" y="599" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Traveler]</text>
+<rect x="461" y="606" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="474" y="621" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">waiting_list</text>
+<text x="726" y="621" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Traveler]</text>
+<text x="474" y="643" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">status</text>
+<text x="726" y="643" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<rect x="40" y="320" width="280" height="204" rx="6" fill="#ffffff" stroke="#1f4d3a" stroke-width="1.5"/>
+<path d="M40 326 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#1f4d3a"/>
+<text x="54" y="346" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Traveler</text>
+<text x="306" y="345" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">traveler.py</text>
+<text x="54" y="379" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">traveler_id</text>
+<text x="306" y="379" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="54" y="401" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">name</text>
+<text x="306" y="401" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="54" y="423" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">age</text>
+<text x="306" y="423" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="54" y="445" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">membership_type</text>
+<text x="306" y="445" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="54" y="467" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">experience_level</text>
+<text x="306" y="467" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int 1-10</text>
+<rect x="41" y="474" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="54" y="489" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">current_treks</text>
+<text x="306" y="489" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Trek]</text>
+<rect x="41" y="496" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="54" y="511" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">completed_treks</text>
+<text x="306" y="511" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Trek]</text>
+<rect x="880" y="320" width="280" height="204" rx="6" fill="#ffffff" stroke="#1f4d3a" stroke-width="1.5"/>
+<path d="M880 326 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#1f4d3a"/>
+<text x="894" y="346" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Guide</text>
+<text x="1146" y="345" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">guide.py</text>
+<text x="894" y="379" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">guide_id</text>
+<text x="1146" y="379" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="894" y="401" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">name</text>
+<text x="1146" y="401" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="894" y="423" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">specialties</text>
+<text x="1146" y="423" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[str]</text>
+<text x="894" y="445" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">certification_level</text>
+<text x="1146" y="445" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int 1-10</text>
+<rect x="881" y="452" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="894" y="467" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">assigned_treks</text>
+<text x="1146" y="467" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[Trek]</text>
+<text x="894" y="489" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">experience_years</text>
+<text x="1146" y="489" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">float</text>
+<text x="894" y="511" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">max_monthly_treks</text>
+<text x="1146" y="511" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<rect x="40" y="600" width="280" height="138" rx="6" fill="#ffffff" stroke="#9a4a12" stroke-width="1.5"/>
+<path d="M40 606 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#9a4a12"/>
+<text x="54" y="626" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Equipment</text>
+<text x="306" y="625" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">equipment.py</text>
+<text x="54" y="659" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">equipment_id</text>
+<text x="306" y="659" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="54" y="681" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">name</text>
+<text x="306" y="681" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="54" y="703" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">total_quantity</text>
+<text x="306" y="703" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<rect x="41" y="710" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="54" y="725" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">loans</text>
+<text x="306" y="725" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[dict]</text>
+<rect x="880" y="600" width="280" height="138" rx="6" fill="#ffffff" stroke="#9a4a12" stroke-width="1.5"/>
+<path d="M880 606 a6 6 0 0 1 6 -6 h268 a6 6 0 0 1 6 6 v34 h-280 z" fill="#9a4a12"/>
+<text x="894" y="626" font-size="16" fill="#ffffff" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600">Transport</text>
+<text x="1146" y="625" font-size="11" fill="#ffffff" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">transport.py</text>
+<text x="894" y="659" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">transport_id</text>
+<text x="1146" y="659" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<text x="894" y="681" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">vehicle_type</text>
+<text x="1146" y="681" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">str</text>
+<text x="894" y="703" font-size="12" fill="#22302a" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">seats</text>
+<text x="1146" y="703" font-size="11" fill="#5b6b63" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">int</text>
+<rect x="881" y="710" width="278" height="22" fill="#0b6e8f" fill-opacity="0.11"/>
+<text x="894" y="725" font-size="12" fill="#0b6e8f" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="600">assignments</text>
+<text x="1146" y="725" font-size="11" fill="#0b6e8f" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-weight="400">list[dict]</text>
+<line x1="40" y1="786" x2="1160" y2="786" stroke="#c9d3cc" transform="translate(0,-22)"/>
+<rect x="40" y="779" width="16" height="12" rx="2" fill="#1f4d3a"/>
+<text x="62" y="790" font-size="12" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Class from the assignment</text>
+<rect x="240" y="779" width="16" height="12" rx="2" fill="#9a4a12"/>
+<text x="262" y="790" font-size="12" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Class we added</text>
+<rect x="385" y="779" width="16" height="12" rx="2" fill="#0b6e8f" fill-opacity="0.25"/>
+<text x="407" y="790" font-size="12" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Field that links to another class</text>
+<polyline points="640,786 680,786" fill="none" stroke="#22302a" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="688" y="790" font-size="12" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Stored reference in a field</text>
+<polyline points="890,786 930,786" fill="none" stroke="#9a4a12" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#headDash)"/>
+<text x="938" y="790" font-size="12" fill="#22302a" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Method call only, Trek stores nothing</text>
+<text x="40" y="818" font-size="12" fill="#5b6b63" text-anchor="start" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-weight="400">Each loan and assignment dictionary holds a Trek object, so a cancelled or moved trek is seen on the next calculation. Trek imports none of the other classes.</text>
+</svg>

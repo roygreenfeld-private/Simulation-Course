@@ -86,6 +86,8 @@ Invalid input and broken rules raise `ValueError` before anything changes, so ca
 
 ### How the classes connect
 
+![Class map showing the six classes, their fields and the links between them](docs/class_map.svg)
+
 - `Agency` holds lists of travelers, guides and treks.
 - `Trek` and `Traveler` point to each other, and so do `Trek` and `Guide`. One method makes each change and updates both sides.
 - `Equipment` and `Transport` point to `Trek`, and `Trek` has no field pointing back.
