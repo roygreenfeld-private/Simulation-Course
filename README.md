@@ -18,7 +18,7 @@ The classes were checked with scripts kept outside this repository, so nothing h
 ## Project layout
 
 ```text
-task_1_314953852/
+Field Trek Agency/
   trek.py        Trek: dates, capacity, registration, refunds, status
   traveler.py    Traveler: registrations, private tours, payment report
   guide.py       Guide: assigned treks, availability, statistics
@@ -33,7 +33,7 @@ docs/
 
 ## Quick start
 
-The code uses only the Python standard library. Run it from inside `task_1_314953852`, because the modules import each other by name.
+The code uses only the Python standard library. Run it from inside `Field Trek Agency`, because the modules import each other by name.
 
 ```python
 from datetime import date, timedelta
