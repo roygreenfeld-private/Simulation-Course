@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>פרוטוקול סוכנות הטיולים</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Secular+One&display=swap">
+<style>
+/* Layout: one reading column, like a field protocol; a three-stripe trail blaze identifies the page, each class gets a band with the same inner order. */
+:root {
+  --bg: #f2f6f4; --surface: #ffffff; --fg: #15231d; --muted: #52645c; --line: #c9d6cf;
+  --accent: #1c6a50; --blue: #1d5fa8; --red: #ad3227; --pine: #1c6a50; --blaze: #d9e4de; --code-bg: #e5ede9;
+  --fix-bg: #e0ecf8; --fix-fg: #174f8f;
+  --warn-bg: #fbeecb; --warn-fg: #7a4f00;
+  --keep-bg: #dcf0e5; --keep-fg: #17613f;
+  --display: "Secular One", "Assistant", "Arial Hebrew", Arial, sans-serif;
+  --body: "Assistant", "Arial Hebrew", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101a16; --surface: #17241e; --fg: #e6efea; --muted: #9fb2a9; --line: #2f4239;
+    --accent: #62c7a0; --blue: #7db6ee; --red: #ef8d80; --pine: #62c7a0; --blaze: #33473e; --code-bg: #22332b;
+    --fix-bg: #18324d; --fix-fg: #a6cdf5;
+    --warn-bg: #43330e; --warn-fg: #f2d286;
+    --keep-bg: #173a2a; --keep-fg: #9be0bd;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101a16; --surface: #17241e; --fg: #e6efea; --muted: #9fb2a9; --line: #2f4239;
+  --accent: #62c7a0; --blue: #7db6ee; --red: #ef8d80; --pine: #62c7a0; --blaze: #33473e; --code-bg: #22332b;
+  --fix-bg: #18324d; --fix-fg: #a6cdf5;
+  --warn-bg: #43330e; --warn-fg: #f2d286;
+  --keep-bg: #173a2a; --keep-fg: #9be0bd;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.65; }
+.page {
+  max-width: 920px; margin-inline: auto; padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr);
+}
+header { display: grid; gap: 12px; }
+.blaze { display: flex; flex-direction: column; width: 34px; border-radius: 2px; overflow: hidden; border: 1px solid var(--line); }
+.blaze i { display: block; height: 7px; background: var(--blaze); }
+.blaze i:nth-child(2) { background: var(--accent); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: 1.15; }
+h2 { font-size: 1.55rem; line-height: 1.25; }
+h3 { font-size: 1.08rem; color: var(--accent); }
+p { margin: 0; max-width: 72ch; }
+.lead { font-size: 1.15rem; color: var(--muted); }
+.draft { justify-self: start; white-space: normal; }
+section, .block { display: grid; gap: 14px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.class-band { border-top: 3px solid var(--accent); padding-top: 18px; gap: 24px; scroll-margin-top: 16px; }
+.block { gap: 10px; }
+code {
+  font-family: var(--mono); font-size: .86em; background: var(--code-bg); padding: .08em .35em;
+  border-radius: 3px; direction: ltr; unicode-bidi: isolate; overflow-wrap: anywhere;
+}
+ul, ol { margin: 0; padding-inline-start: 1.3em; display: grid; gap: 7px; max-width: 76ch; }
+strong { font-weight: 700; }
+.note { color: var(--muted); }
+.sources { color: var(--muted); font-size: .95rem; }
+nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+nav.jump a { color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 2px 12px; text-decoration: none; font-weight: 700; }
+nav.jump a:hover { background: var(--code-bg); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.pill { display: inline-block; font-size: .85rem; font-weight: 700; padding: .1em .6em; border-radius: 999px; }
+.fix { background: var(--fix-bg); color: var(--fix-fg); }
+.warn { background: var(--warn-bg); color: var(--warn-fg); }
+.keep { background: var(--keep-bg); color: var(--keep-fg); }
+
+.ranks { list-style: none; padding: 0; gap: 0; counter-reset: rank; border-block: 1px solid var(--line); max-width: none; }
+.ranks li { counter-increment: rank; display: grid; grid-template-columns: 2em minmax(0, 1fr); padding-block: 8px; border-bottom: 1px solid var(--line); }
+.ranks li:last-child { border-bottom: 0; }
+.ranks li::before { content: counter(rank); font-family: var(--display); color: var(--accent); }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: .96rem; }
+th { text-align: start; font-size: .85rem; color: var(--muted); font-weight: 700; }
+th, td { padding: 9px 13px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+td.name { font-weight: 700; }
+.method { width: 25%; }
+
+.flow { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; max-width: none; }
+.flow li { display: flex; align-items: center; gap: 8px; }
+.flow span { background: var(--surface); border: 1px solid var(--accent); border-radius: 4px; padding: 3px 12px; font-weight: 700; }
+.flow li + li::before { content: "←"; color: var(--accent); font-weight: 700; }
+
+.questions { list-style: none; padding: 0; gap: 0; max-width: none; counter-reset: q; border-block: 1px solid var(--line); }
+.questions li { counter-increment: q; display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 2px 0; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.questions li:last-child { border-bottom: 0; }
+.questions li::before { content: counter(q); font-family: var(--display); font-size: 1.25rem; color: var(--accent); grid-row: span 3; line-height: 1.3; }
+.questions li > span { grid-column: 2; }
+.q { font-weight: 700; }
+.rec b { color: var(--accent); }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .page { padding-block: 24px 48px; gap: 36px; }
+  .stack thead { display: none; }
+  .stack, .stack tbody, .stack tr, .stack td { display: block; width: 100%; }
+  .stack tr { padding-block: 8px; border-bottom: 1px solid var(--line); }
+  .stack tbody tr:last-child { border-bottom: 0; }
+  .stack td { border: 0; padding: 3px 13px; }
+  .stack td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-size: .85rem; font-weight: 700; }
+}
+
+body { margin: 0; }
+[hidden] { display: none !important; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.topbar nav {
+  max-width: 920px; margin-inline: auto; display: flex; flex-wrap: wrap; gap: 4px 18px; padding-block: 8px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.topbar a { color: var(--muted); text-decoration: none; font-weight: 700; padding: 2px 0; border-bottom: 3px solid transparent; }
+.topbar a[data-page="skill"] { --mark: var(--blue); }
+.topbar a[data-page="protocol"] { --mark: var(--pine); }
+.topbar a[data-page="classes"] { --mark: var(--red); }
+.topbar a:hover { color: var(--fg); }
+.topbar a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--mark); }
+.page-skill { --accent: var(--blue); }
+.page-protocol { --accent: var(--pine); }
+.page-classes { --accent: var(--red); }
+.hero { display: grid; gap: 16px; padding-block: 12px 4px; }
+.hero h1 { font-size: clamp(2.3rem, 8vw, 3.7rem); line-height: 1.08; }
+.hero .blaze { width: 64px; }
+.hero .blaze i { height: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 12px 36px; margin: 6px 0 0; }
+.facts div { display: grid; }
+.facts dt { font-size: .9rem; color: var(--muted); order: 2; }
+.facts dd { margin: 0; font-family: var(--display); font-size: 1.9rem; line-height: 1.15; color: var(--accent); font-variant-numeric: tabular-nums; order: 1; }
+.class-band { scroll-margin-top: 64px; }
+#questions, #enforcement { scroll-margin-top: 64px; }
+.summary-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 28px; }
+.summary-row > div { min-width: 0; }
+.summary-row b { display: block; color: var(--accent); }
+a { color: var(--accent); }
+.type { display: block; margin-top: 3px; font-size: .82rem; font-weight: 400; color: var(--muted); }
+td.name .pill { margin-top: 4px; }
+td .pill { white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+</head>
+<body>
+<div class="shell" dir="rtl" lang="he">
+  <div class="topbar">
+    <nav aria-label="דפי הפרוטוקול">
+      <a href="#skill" data-page="skill">הסקיל</a>
+      <a href="#protocol" data-page="protocol">פרוטוקול הסוכנות</a>
+      <a href="#classes" data-page="classes">פרוטוקול לכל מחלקה</a>
+    </nav>
+  </div>
+  <div class="page page-skill" id="page-skill">
+    <header class="hero">
+      <div class="blaze" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1>הסקיל <code>course-oop</code></h1>
+      <p class="lead">קודם מה שלמדנו בקורס. הכללים הכלליים ממלאים רק את מה שהתרגול לא מכסה, כי את העבודה בודקים מול מה שנלמד.</p>
+      <dl class="facts">
+        <div><dd>3</dd><dt>רמות עדיפות</dt></div>
+        <div><dd>3</dd><dt>מחלוקות שהוכרעו</dt></div>
+        <div><dd>5</dd><dt>ריחות קוד לזיהוי</dt></div>
+      </dl>
+    </header>
+
+    <section>
+      <h2>מתי הוא פועל</h2>
+      <p>בכל כתיבה, בדיקה או תכנון של מחלקה או מתודה בפרויקט: <code>Trek</code>, <code>Traveler</code>, <code>Guide</code>, <code>Agency</code> או מחלקה חדשה. גם בשאלות על הורשה, כימוס, קומפוזיציה, SOLID ותבניות עיצוב. בתוך הפרויקט הוא מועדף על <code>oop-guide</code>, שנשאר בלי שינוי.</p>
+      <p class="note">הקובץ: <code>.claude/skills/course-oop/SKILL.md</code>. הוא כתוב באנגלית, וזה התרגום המלא שלו.</p>
+    </section>
+
+    <section>
+      <h2>סדר העדיפויות</h2>
+      <ol class="ranks">
+        <li><span><strong>מסמך העבודה,</strong> כשיש כזה. בעבודה 1 זה <code>HW 2027A.pdf</code>, והוא מחייב.</span></li>
+        <li><span><strong>התרגול של הקורס:</strong> תרגול 2, חזרה על מונחה עצמים בפייתון.</span></li>
+        <li><span><strong>הנחיות OOP כלליות:</strong> הסקיל <code>oop-guide</code>.</span></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>הכללים מהתרגול</h2>
+      <ul>
+        <li>מחלקה מייצגת מושג אחד, דרך תכונות (נתונים) ומתודות (התנהגות).</li>
+        <li><code>__init__</code> מגדיר את כל התכונות. רשימות נוצרות בו, כדי ששינוי באובייקט אחד לא ישפיע על אחר.</li>
+        <li>פרמטרים עם ברירת מחדל נותנים התנהגות משמעותית והם ערכים שלא משתנים, כמו <code>x=0</code> או <code>category="general"</code>.</li>
+        <li>כל מתודה מקבלת <code>self</code> ועובדת על התכונות של האובייקט שלה.</li>
+        <li>אובייקטים מתקשרים דרך העברת אובייקט כפרמטר, כמו <code>get_distance(self, other_rocket)</code>.</li>
+        <li>מחלקה מכילה מחזיקה אובייקטים ברשימה ומציעה הוספה, חיפוש והצגה, כמו <code>Library</code>.</li>
+        <li>יורשים כשהילד הוא סוג מיוחד של ההורה, כמו <code>Shuttle(Rocket)</code>: קוראים ל-<code>super().__init__(...)</code>, מוסיפים רק מה שחדש, ודורסים מתודה רק כשההתנהגות שונה. בתוך דריסה משתמשים ב-<code>super().method()</code>, כמו ב-<code>display_info</code>.</li>
+        <li>שמות קבצים באותיות קטנות עם קו תחתון, ושמות מחלקות באות גדולה: <code>rocket.py</code> ו-<code>Rocket</code>.</li>
+        <li>מייבאים עם <code>from module import ClassName</code>, בלי <code>import *</code> ובלי קיצורים סתומים כמו <code>import rocket as r</code>.</li>
+        <li>ניגשים לתכונות ולמתודות עם נקודה.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>המחלוקות, והתרגול מנצח</h2>
+      <div class="table-wrap">
+      <table class="stack">
+        <thead><tr><th>נושא</th><th>התרגול</th><th><code>oop-guide</code></th><th>ההכרעה</th></tr></thead>
+        <tbody>
+          <tr><td class="name">מצב האובייקט</td><td data-label="התרגול">שדות ציבוריים, <code>my_rocket.y</code></td><td data-label="oop-guide">מצב פרטי</td><td data-label="ההכרעה">שדות ציבוריים, בלי <code>_</code> ובלי <code>@property</code>. שינויים עם כללים עוברים דרך מתודות</td></tr>
+          <tr><td class="name">שימוש חוזר</td><td data-label="התרגול">הורשה ל"סוג מיוחד של"</td><td data-label="oop-guide">קומפוזיציה קודם</td><td data-label="ההכרעה">הורשה כשהיחס הוא "הוא סוג של", קומפוזיציה כשהיחס הוא "מחזיק ב"</td></tr>
+          <tr><td class="name">חוזה בין מחלקות</td><td data-label="התרגול">שמות מתודות משותפים</td><td data-label="oop-guide">ממשקים ומחלקות אבסטרקטיות</td><td data-label="ההכרעה">שמות מתודות משותפים, בלי <code>abc</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <section>
+      <h2>מה נשאר מההנחיות הכלליות</h2>
+      <p>אלה לא סותרים את התרגול, ולכן נשארים:</p>
+      <ul>
+        <li><strong>אחריות יחידה:</strong> מפצלים מחלקה רק לפי אחריות אמיתית. מתודות שהעבודה מייעדת למחלקה נשארות בה, גם אם היא גדלה.</li>
+        <li><strong>Liskov:</strong> תת-מחלקה מכבדת את ההתנהגות של ההורה, וקוד שמקבל הורה עובד גם עם ילד. לכן בודקים אובייקטים עם <code>isinstance</code>, ולא עם <code>type(x) is</code>.</li>
+        <li><strong>תבניות עיצוב:</strong> Factory, Strategy או Observer רק כשהן מפשטות בבירור קוד קיים, ולא מראש.</li>
+        <li><strong>מצב משתנה:</strong> אף מתודה לא מחליפה שדה מזהה אחרי היצירה. רשימה שמגיעה מהקוד הקורא מועתקת לפני השמירה.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>ריחות קוד לזיהוי</h2>
+      <ul>
+        <li><strong>God Object:</strong> התנהגות חדשה שלא שייכת למושג עוברת למחלקה חדשה.</li>
+        <li><strong>Refused Bequest:</strong> תת-מחלקה שמבטלת התנהגות שירשה אינה באמת סוג של ההורה, ואז עדיפה קומפוזיציה.</li>
+        <li><strong>Downcasting:</strong> קוד ששואל איזו תת-מחלקה הוא מחזיק צריך לקרוא במקום זה למתודה משותפת.</li>
+        <li><strong>Alternative Classes:</strong> שתי מחלקות שעושות אותה עבודה משתמשות באותו שם מתודה ובאותה חתימה.</li>
+        <li><strong>Temporary Field:</strong> שדה שריק בחלק מהמצבים, כמו <code>guide=None</code>, מטופל במפורש בכל קריאה שלו. אם העבודה דורשת אותו, הוא נשאר.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>דיווח על כישלון, וחריגה מהתרגול</h2>
+      <p><code>borrow_book</code> בתרגול רק מדפיסה הודעת כישלון. עובדים כך, אלא אם העבודה מבקשת טיפול בחריגים. עבודה 1 כן מבקשת, ולכן שם המתודות עושות <code>raise</code> והקוד הקורא מחליט מה לעשות עם <code>try/except</code>.</p>
+      <p>כשבחירה חורגת ממה שבתרגול, כותבים הערה קצרה, כדי שהקורא יראה שזו החלטה מכוונת.</p>
+    </section>
+  </div>
+  <div class="page page-protocol" id="page-protocol" hidden>
+    <header class="hero">
+      <div class="blaze" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1>פרוטוקול העבודה של סוכנות הטיולים</h1>
+      <p class="lead">כללים שחלים על כל המערכת: מה גובר על מה, באיזה סדר כותבים מתודה, ואיך שומרים על נתונים אמינים בין המחלקות.</p>
+      <span class="pill warn draft">טיוטה לאישור. <code>Trek</code> נכתבה, ושאר המחלקות עדיין לא</span>
+      <dl class="facts">
+        <div><dd>6</dd><dt>עקרונות ולידציה</dt></div>
+        <div><dd>4</dd><dt>שלבים בכל מתודה שמשנה מצב</dt></div>
+        <div><dd>6</dd><dt>שאלות שמחכות לתשובה</dt></div>
+      </dl>
+    </header>
+
+    <section>
+      <h2>מה בונים</h2>
+      <div class="summary-row">
+        <div><b>המערכת</b>ניהול סוכנות טיולי שטח בפייתון, עם <code>Trek</code>, <code>Traveler</code>, <code>Guide</code> ו-<code>Agency</code>.</div>
+        <div><b>השיפור היצירתי</b>לפחות שתי מחלקות חדשות, עם שדות ומתודות.</div>
+        <div><b>ההגשה</b>מחברת Colab עם הסברים קצרים, הדגמה לכל מחלקה ומתודה, וקישור בקובץ PDF.</div>
+      </div>
+      <p class="note">מקורות: <code>HW 2027A.pdf</code>, תרגול 2, הסקיל <code>oop-guide</code>, ושמות ששת העקרונות. טקסט ה-PDF חזר אליי הפוך ופענחתי אותו בעצמי, אז שווה לוודא מולו את שמות המתודות ואת הדרישות.</p>
+    </section>
+
+    <section>
+    <h2>סדר העדיפויות</h2>
+    <ol class="ranks">
+      <li><span><strong>קובץ העבודה:</strong> מחייב, ולא מוסיפים דרישות שאינן בו. במחלקות שהוא מגדיר אסור להוסיף שדות, ומותר להוסיף שיטות.</span></li>
+      <li><span><strong>התרגול:</strong> מנצח בכל מחלוקת מול הסקיל, לפי ההחלטה שלך.</span></li>
+      <li><span><strong><code>oop-guide</code>:</strong> ממלא רק את מה שהתרגול לא מכסה.</span></li>
+      <li><span><strong>ששת העקרונות:</strong> קובעים מה בודקים בכל מחלקה.</span></li>
+      <li><span><strong>הנחות שלנו:</strong> רק היכן שהעבודה משאירה חופש, ועם תיעוד קצר.</span></li>
+    </ol>
+  </section>
+
+    <section>
+    <h2>כללים לכל המחלקות</h2>
+    <p>כל מתודה שמשנה מצב נכתבת באותו סדר, כך שכישלון לא משאיר עדכון חלקי:</p>
+    <ol class="flow">
+      <li><span>ולידציה</span></li>
+      <li><span>אילוצים</span></li>
+      <li><span>עדכון</span></li>
+      <li><span>רענון מצב נגזר</span></li>
+    </ol>
+    <ul>
+      <li><strong>שדות:</strong> ב-<code>Trek</code>, <code>Traveler</code>, <code>Guide</code> ו-<code>Agency</code> יש רק השדות שרשומים בעבודה. מידע נוסף מחשבים בשיטה מהשדות הקיימים, ולא שומרים. מותר להוסיף שיטות ופרמטרים אופציונליים. שדות חדשים אפשר להוסיף רק במחלקות החדשות שהעבודה מבקשת. קבועים של המחלקה לבדיקות, כמו <code>VALID_REGIONS</code>, הם לא נתונים של האובייקט, אבל מונה שמשתנה הוא כן, ולכן אסור.</li>
+      <li><strong>שגיאות:</strong> המחלקה עושה <code>raise</code>, והסימולציה תופסת ב-<code>try/except</code>. כך גם הקוד הקיים עובד, והעבודה מדגישה טיפול בחריגים.</li>
+      <li><strong>בדיקת טיפוס:</strong> <code>type(x) is int</code> לערכים פשוטים, כדי לדחות <code>True</code>. <code>isinstance</code> לאובייקטים, כדי שתת-מחלקה תעבור. יוצא מן הכלל: <code>Trek</code> בודקת מטייל ומדריך לפי שם השדה, כי <code>Traveler</code> ו-<code>Guide</code> מייבאים אותה, וייבוא הפוך היה מעגלי.</li>
+      <li><strong>קשר דו-כיווני:</strong> מתודה אחת מבצעת את העבודה ומעדכנת את שני הצדדים, והשנייה רק קוראת לה.</li>
+      <li><strong>חפיפה בתאריכים:</strong> יש חישוב אחד בלבד, ב-<code>Trek</code>. יום הסיום נספר, אז טיול בן יום אחד מסתיים באותו יום.</li>
+      <li><strong>לכל מתודה:</strong> תרחיש תקין, תרחיש דחייה והסבר קצר בעברית על מה שהנחנו או הוספנו.</li>
+    </ul>
+    <div class="table-wrap">
+      <table class="stack">
+        <thead><tr><th>עיקרון</th><th>הפרשנות שלי</th></tr></thead>
+        <tbody>
+          <tr><td class="name">שלמות נתונים</td><td data-label="פרשנות">אין אובייקט חסר, ואין הפניה לאובייקט שלא קיים</td></tr>
+          <tr><td class="name">עקביות</td><td data-label="פרשנות">אותו מידע זהה בכל מקום שבו הוא מופיע</td></tr>
+          <tr><td class="name">עמידה באילוצים</td><td data-label="פרשנות">כללים שקושרים בין אובייקטים נבדקים לפני כל פעולה</td></tr>
+          <tr><td class="name">עדכניות נתונים</td><td data-label="פרשנות">מצב נגזר מתעדכן מיד אחרי כל שינוי</td></tr>
+          <tr><td class="name">דיוק נתונים</td><td data-label="פרשנות">ערכים מחושבים נכונים ומכוסים בבדיקה</td></tr>
+          <tr><td class="name">ולידציית נתונים</td><td data-label="פרשנות">כל ערך קלט נבדק בכניסה לפי טיפוס וטווח</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+    <section>
+      <h2>מי מבצע מה בין המחלקות</h2>
+      <p>בעבודה יש מתודות כפולות בשתי מחלקות. כדי שהנתונים לא ייצאו משיווי משקל, רק מקום אחד מבצע את העדכון.</p>
+      <div class="table-wrap">
+        <table class="stack">
+          <thead><tr><th>פעולה</th><th>מי מבצע</th><th>מי רק קורא</th></tr></thead>
+          <tbody>
+            <tr><td class="name">רישום לטיול</td><td data-label="מבצע"><code>Trek.register</code></td><td data-label="קורא"><code>Traveler.register_to_trek</code></td></tr>
+            <tr><td class="name">ביטול רישום</td><td data-label="מבצע"><code>Trek.cancel_registration</code></td><td data-label="קורא"><code>Traveler.cancel_trek</code>, שמחשבת את שיעור ההחזר ומחזירה אותו</td></tr>
+            <tr><td class="name">שיבוץ מדריך</td><td data-label="מבצע"><code>Trek.assign_guide</code></td><td data-label="קורא"><code>Guide.assign_trek</code></td></tr>
+            <tr><td class="name">חישוב חפיפה</td><td data-label="מבצע"><code>Trek</code></td><td data-label="קורא"><code>is_available</code> של <code>Traveler</code> ושל <code>Guide</code>, והדוח של <code>Agency</code></td></tr>
+            <tr><td class="name">מחיר סופי</td><td data-label="מבצע"><code>Traveler.get_final_price</code></td><td data-label="קורא">דוח התשלומים ודוח המנויים</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>התהליך לכל מתודה</h2>
+      <ol>
+        <li>קוראים את הסעיף בעבודה ומציגים לך את ההנחות לפני הכתיבה.</li>
+        <li>כותבים לפי ארבעת השלבים: ולידציה, אילוצים, עדכון, רענון מצב נגזר.</li>
+        <li>בודקים תרחיש תקין ותרחיש דחייה.</li>
+        <li>מוסיפים הסבר קצר בעברית על מה שהנחנו ועל מה שהוספנו.</li>
+        <li>עושים commit רק לפי בקשה שלך.</li>
+      </ol>
+    </section>
+
+    <section id="questions">
+    <h2>שאלות פתוחות</h2>
+    <p class="note">שאלות 1 ו-4 אושרו. <code>Trek</code> נכתבה לפי ההמלצות של שאלות 2 ו-3, והן עדיין מחכות לאישור שלך, כמו שאר השאלות.</p>
+    <ol class="questions">
+      <li>
+        <span class="q">איפה לעבוד?</span>
+        <span>ההגשה היא מחברת Colab, וב-repo יש קובצי <code>.py</code>. התרגול גם דורש שמות קבצים באותיות קטנות, בניגוד ל-<code>Trek_Class.py</code> ו-<code>TESTS.PY</code>. בנוסף, <code>Trek</code>, <code>Traveler</code> ו-<code>Guide</code> בודקים זה את זה עם <code>isinstance</code>, ובקבצים נפרדים זה ייבוא מעגלי.</span>
+        <span class="rec"><b>אושר:</b> ממשיכים ב-<code>.py</code> ומאחדים למחברת בסוף. כל הקבצים קיבלו שמות באותיות קטנות: <code>trek.py</code>, <code>traveler.py</code>, <code>guide.py</code>, <code>agency.py</code> ו-<code>tests.py</code>. את הייבוא המעגלי פתרתי בלי <code>import</code> ב-<code>Trek</code>, כי <code>import</code> בתוך שיטה היה נכשל אחרי האיחוד למחברת.</span>
+      </li>
+      <li>
+        <span class="q">מה לעשות עם תאריכי עבר?</span>
+        <span>אם נחסום אותם ביצירת טיול, מחברת עם תאריכים קבועים תיכשל כשתורץ אחרי התאריכים האלה.</span>
+        <span class="rec"><b>המלצה:</b> לאפשר אותם ביצירת טיול, ולחסום רישום לטיול שכבר יצא.</span>
+      </li>
+      <li>
+        <span class="q">איך לבדוק שיטות שתלויות בתאריך של היום?</span>
+        <span><code>calculate_refund_rate()</code> ו-<code>complete_trek()</code> מוגדרות בלי פרמטרים, ותוצאה שתלויה בתאריך של היום משתנה בין הרצות. בלי פתרון אי אפשר גם להדגים סיום טיול: אסור להירשם לטיול שכבר יצא, אז טיול שעבר לעולם לא יגיע למאושר.</span>
+        <span class="rec"><b>המלצה:</b> פרמטרים אופציונליים <code>cancel_date=None</code> ו-<code>completion_date=None</code>, שברירת המחדל שלהם היא היום. הקריאה שהעבודה מגדירה ממשיכה לעבוד.</span>
+      </li>
+      <li>
+        <span class="q">להוסיף "Galilee" לרשימת האזורים?</span>
+        <span>העבודה מזכירה את הגליל כדוגמה לאזור.</span>
+        <span class="rec"><b>אושר ובוצע:</b> "Galilee" נוסף, וגם גליל עליון ותחתון נשארו.</span>
+      </li>
+      <li>
+        <span class="q">לשמור את הפרוטוקול כ-<code>CLAUDE.md</code> ב-repo?</span>
+        <span>כרגע הוא קיים רק בעמוד הזה.</span>
+        <span class="rec"><b>המלצה:</b> כן, כי אז הוא ייטען אוטומטית בכל סשן.</span>
+      </li>
+      <li>
+        <span class="q">להוסיף מחלקת בסיס <code>Person</code>?</span>
+        <span>ל-<code>Traveler</code> ול-<code>Guide</code> יש ולידציית שם ו-<code>is_available</code> זהים, והעבודה מבקשת מערכת היררכית.</span>
+        <span class="rec"><b>המלצה:</b> כן. מטייל ומדריך הם באמת "סוג של" אדם, וזה מדגים את ההורשה מהתרגול. <code>is_available</code> תעבור לשם, וכל ילד יספק את רשימת הטיולים שלו.</span>
+      </li>
+      <li>
+        <span class="q">אילו מחלקות חדשות לבנות?</span>
+        <span>העבודה משאירה את הבחירה לכם, ויש ערך ברעיון מקורי יותר מהדוגמאות שלה.</span>
+        <span class="rec"><b>המלצה:</b> <code>Equipment</code> ו-<code>Transport</code>, אלא אם יש לך רעיון שמעניין אותך יותר.</span>
+      </li>
+      <li>
+        <span class="q">מה מחיר ואזור של טיול פרטי?</span>
+        <span>החתימה <code>request_private_tour(guide, start_date, duration_days)</code> לא כוללת אזור, קושי או מחיר.</span>
+        <span class="rec"><b>המלצה:</b> האזור הוא ההתמחות הראשונה של המדריך, הקושי לפי רמת המטייל, והמחיר קבוע למחלקה לכל יום. המזהה מחושב ממזהה המטייל ומתאריך היציאה, בלי מונה. זו הנחה שנתעד.</span>
+      </li>
+    </ol>
+  </section>
+  </div>
+  <div class="page page-classes" id="page-classes" hidden>
+    <header class="hero">
+      <div class="blaze" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1>פרוטוקול לכל מחלקה</h1>
+      <p class="lead">לכל מחלקה: איך מממשים בה OOP, מה כל שדה מתאר וממה הוא מוגן, ומה המטרה של כל שיטה וממה היא מוגנת.</p>
+      <span class="pill warn draft">טיוטה לאישור. <code>Trek</code> נכתבה, ושאר המחלקות עדיין לא</span>
+      <dl class="facts">
+        <div><dd>4</dd><dt>מחלקות שהעבודה דורשת</dt></div>
+        <div><dd>31</dd><dt>שדות שהעבודה מגדירה</dt></div>
+        <div><dd>28</dd><dt>שיטות שהעבודה מגדירה</dt></div>
+        <div><dd>2</dd><dt>מחלקות חדשות לפחות</dt></div>
+      </dl>
+      <nav class="jump" aria-label="מעבר למחלקה">
+        <a href="#trek">Trek</a><a href="#traveler">Traveler</a><a href="#guide">Guide</a><a href="#agency">Agency</a><a href="#extension">מחלקות חדשות</a>
+      </nav>
+      <p class="note">הטבלאות בנויות לפי ההמלצות, שעדיין לא אושרו. מספרי השאלות מתייחסים ל<a href="#questions">שאלות הפתוחות</a> בדף פרוטוקול הסוכנות.</p>
+    </header>
+
+    <section id="enforcement">
+      <h2>איך ההגנה עובדת</h2>
+      <p>השדות ציבוריים, כמו בתרגול, ולכן שום שדה לא מוגן לבדו. ההגנה יושבת בנקודות הכניסה אליו:</p>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">נקודת כניסה</th><th>מה היא עושה</th></tr></thead>
+        <tbody>
+          <tr><td class="name">הבנאי</td><td data-label="מה עושה">בודק כל פרמטר לפי סוג וטווח. אם ערך לא תקין, האובייקט לא נוצר</td></tr>
+          <tr><td class="name">ערך התחלתי</td><td data-label="מה עושה">שדה שאינו פרמטר, כמו <code>status</code> או <code>participants</code>, נפתח בערך קבוע ב-<code>__init__</code>, ולכן אי אפשר להעביר בו ערך לא תקין ביצירה</td></tr>
+          <tr><td class="name">שיטה</td><td data-label="מה עושה">כל שינוי עם כללים עובר דרך שיטה, כמו <code>borrow_book</code> בתרגול. הפרה מסתיימת ב-<code>ValueError</code> לפני שמשהו השתנה, אלא אם כתוב אחרת</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>מה זה לא מכסה:</strong> השמה ישירה מחוץ למחלקה. הרצתי את הקוד הקיים, ו-<code>trek.price = -5</code> או <code>trek.status = "banana"</code> עוברים בלי שגיאה, וזה נכון גם אחרי כתיבת <code>Trek</code>. כדי לחסום את זה צריך <code>@property</code>, וההכרעה הייתה שהתרגול מנצח. לכן הכלל הוא מוסכמה: קוד מחוץ למחלקה קורא שדות, אבל משנה אותם רק דרך שיטות.</p>
+      <p class="note"><code>Trek</code> כתובה ב-<code>trek.py</code>, וכל מה שבטבלאות שלה נבדק בהרצה. בדקתי אותה מול מחלקות דמה, כי <code>Traveler</code> ו-<code>Guide</code> עוד לא נכתבו, ולכן צריך לבדוק אותה שוב מול המחלקות האמיתיות. בשאר המחלקות הטבלאות הן תוכנית. <span class="pill warn">תוספת</span> מסמן שיטה או פרמטר שהעבודה לא מגדירה. שדות לא מוסיפים, ו<span class="pill warn">הנחה</span> מסמן החלטה שלנו במקום שהעבודה משאירה פתוח.</p>
+    </section>
+
+    <section class="class-band" id="trek">
+    <h2><code>Trek</code></h2>
+    <p><strong>אחריות:</strong> נתוני הטיול, הקיבולת, רשימת ההמתנה והסטטוס. זו המחלקה שמבצעת בפועל את <code>register</code> ואת <code>assign_guide</code>.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">מחלקה ומושג</td><td>טיול אחד הוא אובייקט אחד. הנתונים בשדות, וההתנהגות בשיטות שעובדות על <code>self</code></td></tr>
+        <tr><td class="name">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, ו-<code>participants</code>, <code>guide</code> ו-<code>status</code> משתנים רק דרך שיטות, כמו <code>move_rocket</code></td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td><code>Trek</code> מחזיק <code>Guide</code> ורשימות של <code>Traveler</code>, כמו ש-<code>Library</code> מחזיקה <code>Book</code></td></tr>
+        <tr><td class="name">אובייקטים מתקשרים</td><td><code>register(traveler)</code> מקבלת אובייקט כפרמטר, כמו <code>get_distance(other_rocket)</code>, וקוראת לשיטות שלו</td></tr>
+        <tr><td class="name">הורשה</td><td>לא נדרשת. טיול פרטי הוא <code>Trek</code> רגיל עם מקום אחד, כי ההתנהגות שלו לא שונה</td></tr>
+        <tr><td class="name">אחריות יחידה</td><td>החפיפה ובדיקת התאריכים מחושבות רק כאן, והמחלקות האחרות קוראות להן</td></tr>
+      </tbody></table></div>
+      <p class="note"><code>Trek</code> לא מייבאת את <code>Traveler</code> ואת <code>Guide</code>, אלא מזהה אותם לפי שמות השדות, כמו שהתרגול נשען על שמות משותפים. כך אין ייבוא מעגלי, והקוד יעבוד גם אחרי האיחוד למחברת.</p>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>trek_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של הטיול</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי; מזהה כפול</td><td data-label="נאכף">בנאי: <code>type(trek_id) is int</code> וגדול מ-0. כפילות: <code>Agency.add_trek</code></td></tr>
+          <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">שם הטיול</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type(name) is str</code> ו-<code>name.strip()</code></td></tr>
+          <tr><td class="name"><code>region</code><span class="type"><code>str</code> מרשימה סגורה</span></td><td data-label="מתאר">אזור הטיול</td><td data-label="מוגן מ">שגיאת כתיב, אזור לא מוכר, סוג לא נכון</td><td data-label="נאכף">בנאי: בדיקה מול <code>Trek.VALID_REGIONS</code>, שכוללת גם "Galilee"</td></tr>
+          <tr><td class="name"><code>difficulty_level</code><span class="type"><code>int</code>, 1 עד 10</span></td><td data-label="מתאר">דרגת הקושי</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, ערך מחוץ לסולם</td><td data-label="נאכף">בנאי: <code>type is int</code> ובדיקת טווח. הסולם הוא <span class="pill warn">הנחה</span></td></tr>
+          <tr><td class="name"><code>min_participants</code><span class="type"><code>int</code></span></td><td data-label="מתאר">מספר המשתתפים המינימלי ליציאה</td><td data-label="מוגן מ">טקסט, <code>True</code>, אפס ומספר שלילי; ערך גדול מהמקסימום</td><td data-label="נאכף">בנאי: <code>type is int</code>, גדול מ-0, ולא גדול מ-<code>max_participants</code></td></tr>
+          <tr><td class="name"><code>max_participants</code><span class="type"><code>int</code></span></td><td data-label="מתאר">הקיבולת המקסימלית</td><td data-label="מוגן מ">טקסט, <code>True</code>; ערך קטן מהמינימום; רישום מעבר לקיבולת</td><td data-label="נאכף">בנאי: אותן בדיקות. קיבולת: <code>has_capacity</code> בתוך <code>register</code></td></tr>
+          <tr><td class="name"><code>start_date</code><span class="type"><code>datetime.date</code></span></td><td data-label="מתאר">תאריך היציאה</td><td data-label="מוגן מ">טקסט, <code>None</code>; <code>datetime</code>, כי השוואה שלו ל-<code>date</code> קורסת ב-<code>TypeError</code></td><td data-label="נאכף">בנאי ו-<code>set_dates</code>, דרך <code>check_dates</code>: <code>type(start_date) is date</code></td></tr>
+          <tr><td class="name"><code>duration_days</code><span class="type"><code>int</code>, לפחות 1</span></td><td data-label="מתאר">משך הטיול בימים</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי</td><td data-label="נאכף">בנאי. שינוי רק דרך <code>set_dates</code>, באותה בדיקה</td></tr>
+          <tr><td class="name"><code>price</code><span class="type"><code>int</code> או <code>float</code></span></td><td data-label="מתאר">מחיר מלא לפני הנחות</td><td data-label="מוגן מ">טקסט, <code>True</code>, אפס ומספר שלילי; <code>nan</code> ו-<code>inf</code>; דריסה בידי הנחה</td><td data-label="נאכף">בנאי: סוג, <code>math.isfinite</code> וערך חיובי. הנחה מחושבת בנפרד ב-<code>get_final_price</code> ולא נשמרת כאן</td></tr>
+          <tr><td class="name"><code>guide</code><span class="type"><code>Guide</code> או <code>None</code></span></td><td data-label="מתאר">המדריך המשובץ</td><td data-label="מוגן מ">מדריך שלא עבר בדיקת זמינות; קריסה בקריאת <code>trek.guide.name</code> כשאין מדריך</td><td data-label="נאכף">נפתח ב-<code>None</code>. משתנה רק דרך <code>assign_guide</code> ו-<code>remove_trek</code>. כל קריאה מטפלת ב-<code>None</code></td></tr>
+          <tr><td class="name"><code>participants</code><span class="type"><code>list</code> של <code>Traveler</code></span></td><td data-label="מתאר">המטיילים הרשומים</td><td data-label="מוגן מ">שיתוף רשימה בין טיולים; רישום כפול; חריגה מהקיבולת; מטייל שרשום גם בהמתנה</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>, ואומת שאינה משותפת. משתנה רק דרך <code>register</code>, <code>cancel_registration</code> ו-<code>cancel_trek</code></td></tr>
+          <tr><td class="name"><code>waiting_list</code><span class="type"><code>list</code> של <code>Traveler</code></span></td><td data-label="מתאר">רשימת ההמתנה, לפי סדר הכניסה</td><td data-label="מוגן מ">שיתוף רשימה בין טיולים; כניסה כפולה; כניסה כשיש מקום פנוי; מטייל שלא מתאים לרמה</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>add_to_waiting_list</code>, <code>promote_from_waiting_list</code> ו-<code>cancel_trek</code></td></tr>
+          <tr><td class="name"><code>status</code><span class="type"><code>str</code> מרשימה סגורה</span></td><td data-label="מתאר">מתוכנן, מאושר, בוטל או הושלם</td><td data-label="מוגן מ">ערך לא מוכר; מעבר לא חוקי, כמו החייאת טיול שבוטל; סטטוס שלא תואם למספר הרשומים</td><td data-label="נאכף">נפתח ב-<code>"planned"</code>. משתנה רק דרך <code>update_status</code>, <code>cancel_trek</code> ו-<code>complete_trek</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר טיול תקין, בלי מדריך ובלי משתתפים, בסטטוס מתוכנן</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות. בודק לפני ההשמות, כך שלא נוצר אובייקט חלקי</td></tr>
+          <tr><td class="name"><code>assign_guide</code><span class="type"><code>(guide)</code></span></td><td data-label="מטרה">משבצת מדריך ומעדכנת גם את <code>trek.guide</code> וגם את <code>guide.assigned_treks</code></td><td data-label="מוגנת מ">אובייקט שאינו <code>Guide</code>; טיול שבוטל או הושלם; טיול שכבר יש לו מדריך; אזור מחוץ להתמחויות; מדריך לא פנוי; חריגה מהמגבלה החודשית</td></tr>
+          <tr><td class="name"><code>set_dates</code><span class="type"><code>(start_date, duration_days)</code></span></td><td data-label="מטרה">קובעת מועד ומשך חדשים</td><td data-label="מוגנת מ">קלט לא תקין; טיול שבוטל או הושלם; התנגשות אצל המדריך או אצל רשום כלשהו; חריגה מהמגבלה החודשית של המדריך בחודש החדש; זיהוי חפיפה של הטיול עם עצמו. אם יש הפרה, התאריכים נשארים כשהיו</td></tr>
+          <tr><td class="name"><code>has_capacity</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם נשאר מקום</td><td data-label="מוגנת מ">אין קלט, והיא לא משנה מצב. היא סומכת על הערכים שהבנאי כבר בדק</td></tr>
+          <tr><td class="name"><code>is_suitable</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">בודקת אם <code>experience_level</code> גדול או שווה ל-<code>difficulty_level</code> <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>. למטייל שלא מתאים היא מחזירה <code>False</code> ולא שגיאה</td></tr>
+          <tr><td class="name"><code>register</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">רושמת מטייל, מעדכנת את שני הצדדים ומרעננת סטטוס</td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>; טיול שבוטל, הושלם או כבר יצא; רישום כפול; מטייל בהמתנה; רמה לא מתאימה; טיול מלא; חפיפה בלוח הזמנים. העדכון נעשה רק אחרי כל הבדיקות</td></tr>
+          <tr><td class="name"><code>cancel_registration</code><span class="type"><code>(traveler_id)</code></span></td><td data-label="מטרה">מבטלת רישום, מקדמת ממתין ומרעננת סטטוס</td><td data-label="מוגנת מ">מזהה שלא נמצא ברשומים; טיול שכבר בוטל או הושלם; עדכון של צד אחד בלבד</td></tr>
+          <tr><td class="name"><code>calculate_refund_rate</code><span class="type"><code>(cancel_date=None)</code></span></td><td data-label="מטרה">מחזירה את שיעור ההחזר. הצעה: 30+ ימים 100%, 14–29 ימים 75%, 7–13 ימים 50%, פחות מכך 0% <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">תאריך לא תקין; טעות בגבולות המדרגות; ביטול אחרי היציאה, שמחזיר 0%. הקריאה בלי פרמטר משתמשת בתאריך של היום, ראו שאלה 3</td></tr>
+          <tr><td class="name"><code>add_to_waiting_list</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">מוסיפה מטייל לסוף רשימת ההמתנה</td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>; טיול שבוטל או הושלם; טיול שיש בו מקום; מטייל שכבר רשום או ממתין; רמה לא מתאימה</td></tr>
+          <tr><td class="name"><code>promote_from_waiting_list</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מקדמת ממתין כשמתפנה מקום: premium, annual, basic, ובתוך כל סוג לפי זמן הכניסה</td><td data-label="מוגנת מ">אין מקום או אין ממתינים, ואז היא לא עושה כלום בלי שגיאה; ממתין שכבר לא פנוי מדולג, כדי שהביטול שהפעיל אותה לא ייכשל; הקידום עובר דרך <code>register</code>, כך שאין עקיפה של הבדיקות</td></tr>
+          <tr><td class="name"><code>update_status</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מעדכנת למאושר אם יש לפחות מינימום רשומים, אחרת למתוכנן</td><td data-label="מוגנת מ">החייאה של טיול שבוטל או הושלם: היא פועלת רק במצב מתוכנן או מאושר</td></tr>
+          <tr><td class="name"><code>cancel_trek</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מבטלת את הטיול, משחררת רשומים, ממתינים ומדריך. המטיילים לא חייבים כלום, כי הטיול יוצא מ-<code>current_treks</code> <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">ביטול כפול; ביטול של טיול שהושלם; דילוג על מטיילים, כי הלולאה לא מוחקת מהרשימה שעליה היא רצה</td></tr>
+          <tr><td class="name"><code>complete_trek</code><span class="type"><code>(completion_date=None)</code></span></td><td data-label="מטרה">מסמנת הושלם, ורק אז קוראת ל-<code>add_completed_trek</code> לכל משתתף. הקריאה בלי פרמטר משתמשת בתאריך של היום, ראו שאלה 3</td><td data-label="מוגנת מ">טיול שלא אושר; סיום לפני תאריך הסיום; סיום כפול; טיול שבוטל</td></tr>
+          <tr data-kind="added"><td class="name"><code>check_traveler</code><span class="type"><code>(traveler)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בודקת שהאובייקט הוא מטייל, לפי השדה <code>traveler_id</code></td><td data-label="מוגנת מ">אובייקט מסוג אחר, בלי ייבוא מעגלי. תת-מחלקה של <code>Traveler</code> עוברת</td></tr>
+          <tr data-kind="added"><td class="name"><code>check_guide</code><span class="type"><code>(guide)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בודקת שהאובייקט הוא מדריך, לפי השדה <code>guide_id</code></td><td data-label="מוגנת מ">אובייקט מסוג אחר, בלי ייבוא מעגלי. תת-מחלקה של <code>Guide</code> עוברת</td></tr>
+          <tr data-kind="added"><td class="name"><code>is_active</code><span class="type"><code>()</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> אם הטיול לא בוטל ולא הושלם</td><td data-label="מוגנת מ">כללי סטטוס שונים בכל שיטה. לא משנה מצב</td></tr>
+          <tr data-kind="added"><td class="name"><code>has_departed</code><span class="type"><code>()</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> החל מיום היציאה</td><td data-label="מוגנת מ">רישום או המתנה לטיול שכבר יצא. לא משנה מצב</td></tr>
+          <tr data-kind="added"><td class="name"><code>get_end_date</code><span class="type"><code>()</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה את היום האחרון של הטיול</td><td data-label="מוגנת מ">טעות של יום בחישוב הסיום, כי יום הסיום נספר</td></tr>
+          <tr data-kind="added"><td class="name"><code>is_guide_month_full</code><span class="type"><code>(guide, start_date)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> אם למדריך אין מקום בחודש הזה, בלי לספור את הטיול עצמו</td><td data-label="מוגנת מ">חישוב שונה של המגבלה ב-<code>assign_guide</code> וב-<code>set_dates</code></td></tr>
+          <tr data-kind="added"><td class="name"><code>check_dates</code><span class="type"><code>(start_date, duration_days)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בדיקת תאריך ומשך במקום אחד, לבנאי, ל-<code>set_dates</code> ול-<code>is_available</code></td><td data-label="מוגנת מ">סוג תאריך לא נכון ומשך לא תקין, בלי לשכפל את הבדיקה</td></tr>
+          <tr data-kind="added"><td class="name"><code>overlaps</code><span class="type"><code>(start_date, duration_days)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> אם טווח התאריכים חופף לטיול. יום הסיום נספר</td><td data-label="מוגנת מ">שני חישובים שונים של חפיפה במחלקות שונות; טעות ביום הגבול. טיול בן יום אחד מסתיים באותו יום</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>כל פרמטרי הבנאי חובה. <code>guide</code> יכול להיות <code>None</code> רק עד השיבוץ, וכל קריאה שלו מטפלת ב-<code>None</code></td></tr>
+        <tr><td class="name">עקביות</td><td>מטייל נמצא ב-<code>participants</code> רק אם הטיול נמצא ב-<code>current_treks</code> שלו, ולעולם לא גם ברשומים וגם בהמתנה</td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td><code>min_participants</code> עד <code>max_participants</code>; רשומים לא עוברים את המקסימום; מעברי סטטוס: מתוכנן ומאושר הלוך ושוב, משניהם לבוטל, ומאושר להושלם</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td><code>update_status</code> אחרי כל שינוי ברשומים; <code>promote_from_waiting_list</code> כשמתפנה מקום</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>תאריך סיום הוא התחלה ועוד <code>duration_days</code> פחות 1; גבולות מדרגות ההחזר מדויקים; <code>price</code> הוא תמיד המחיר לפני הנחה</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>בנאי ו-<code>set_dates</code> משתמשים באותה בדיקה; <code>start_date</code> מסוג <code>date</code>; <code>name</code> לא ריק; <code>price</code> סופי וחיובי</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>רישום לטיול מלא, לטיול שבוטל, או רישום כפול.</li>
+        <li>מטייל שרמתו נמוכה מדי או שיש לו חפיפה בלוח הזמנים.</li>
+        <li><code>set_dates</code> שיוצר התנגשות, ובדיקה שהתאריכים נשארו כשהיו.</li>
+        <li>ירידה מתחת למינימום מחזירה למתוכנן; premium מקודם לפני basic שנכנס לפניו.</li>
+        <li>בנאי עם <code>nan</code> במחיר, שם ריק או תאריך לא תקין.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>התיקונים שבוצעו</h3>
+      <ul>
+        <li><span class="pill keep">בוצע</span> <code>start_date</code> נבדק עכשיו. טקסט, <code>None</code> ו-<code>datetime</code> נדחים.</li>
+        <li><span class="pill keep">בוצע</span> <code>price</code> דוחה <code>nan</code> ו-<code>inf</code>, עם <code>math.isfinite</code>.</li>
+        <li><span class="pill keep">בוצע</span> <code>name</code> דוחה מחרוזת ריקה או רווחים בלבד.</li>
+        <li><span class="pill keep">בוצע</span> "Galilee" נוסף לרשימת האזורים.</li><li><span class="pill keep">בוצע</span> הקובץ נקרא עכשיו <code>trek.py</code>.</li>
+        <li><span class="pill keep">בוצע</span> <code>cancel_trek</code> לא כותבת יותר לשדה <code>cancelled_treks</code>, שאינו בעבודה ולכן הוסר.</li>
+        <li><span class="pill keep">להשאיר</span> קושי 1–10 כהנחה מתועדת, ו-<code>ValueError</code>. גבול ל-<code>duration_days</code> ירד, כי העבודה לא מבקשת אותו.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="class-band" id="traveler">
+    <h2><code>Traveler</code></h2>
+    <p><strong>אחריות:</strong> פרטי המטייל, הטיולים שלו והתשלומים. הוא לא משנה ישירות את הרשימות של <code>Trek</code>, אלא קורא למתודות שלו.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, והרשימות <code>current_treks</code> ו-<code>completed_treks</code> משתנות רק דרך שיטות</td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td>מטייל מחזיק רשימות של <code>Trek</code>. הוא אינו סוג של טיול</td></tr>
+        <tr><td class="name">אובייקטים מתקשרים</td><td><code>register_to_trek(trek)</code> רק קוראת ל-<code>trek.register(self)</code>, כך שיש מקום אחד שמבצע את הרישום</td></tr>
+        <tr><td class="name">הורשה</td><td>אם תאשר את שאלה 6: <code>Traveler(Person)</code> עם <code>super().__init__(...)</code>. <code>name</code> ו-<code>is_available</code> עוברים ל-<code>Person</code>, ו-<code>traveler_id</code> נשאר כאן</td></tr>
+        <tr><td class="name">שמות משותפים</td><td><code>is_available</code> עם אותה חתימה כמו ב-<code>Guide</code>, כך שאפשר לקרוא לשתיהן באותה צורה, בלי <code>abc</code></td></tr>
+        <tr><td class="name">אחריות יחידה</td><td>כל הידע על סוגי מנוי נמצא כאן: הנחה ב-<code>get_final_price</code> וקדימות ב-<code>get_priority</code></td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>traveler_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של המטייל</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי; מזהה כפול</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0. כפילות: <code>Agency.add_traveler</code></td></tr>
+          <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">השם המלא</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>name.strip()</code></td></tr>
+          <tr><td class="name"><code>age</code><span class="type"><code>int</code></span></td><td data-label="מתאר">הגיל</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0</td></tr>
+          <tr><td class="name"><code>membership_type</code><span class="type"><code>str</code> מרשימה סגורה</span></td><td data-label="מתאר">סוג המנוי: basic, annual או premium</td><td data-label="מוגן מ">סוג לא מוכר, שהיה מפיל את חישוב ההנחה ואת סדר ההמתנה</td><td data-label="נאכף">בנאי: בדיקה מול רשימה קבועה במחלקה, כמו <code>VALID_REGIONS</code></td></tr>
+          <tr><td class="name"><code>experience_level</code><span class="type"><code>int</code>, 1 עד 10</span></td><td data-label="מתאר">רמת הניסיון</td><td data-label="מוגן מ">טקסט, <code>True</code>, ערך מחוץ לסולם, שהיה נותן השוואה חסרת משמעות מול הקושי</td><td data-label="נאכף">בנאי: <code>type is int</code> וטווח. אותו סולם כמו <code>difficulty_level</code> <span class="pill warn">הנחה</span></td></tr>
+          <tr><td class="name"><code>current_treks</code><span class="type"><code>list</code> של <code>Trek</code></span></td><td data-label="מתאר">הטיולים שהוא רשום אליהם</td><td data-label="מוגן מ">שיתוף רשימה בין מטיילים; טיול כפול; טיול שנמצא גם ב-<code>completed_treks</code></td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. <code>Trek.register</code> מוסיפה, והיציאה בביטול או בסיום</td></tr>
+          <tr><td class="name"><code>completed_treks</code><span class="type"><code>list</code> של <code>Trek</code></span></td><td data-label="מתאר">הטיולים שהושלמו</td><td data-label="מוגן מ">סימון של טיול שלא השתתף בו; סימון כפול; טיול פעיל שמסומן כהושלם</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>add_completed_trek</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר מטייל תקין עם שתי רשימות ריקות</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות, לפני ההשמות</td></tr>
+          <tr><td class="name"><code>register_to_trek</code><span class="type"><code>(trek)</code></span></td><td data-label="מטרה">בקשת רישום, שמועברת ל-<code>trek.register(self)</code></td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>. שאר הבדיקות ב-<code>Trek</code>, כך שאין דרך לעקוף אותן</td></tr>
+          <tr><td class="name"><code>cancel_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מבטלת רישום ומחזירה את שיעור ההחזר. הביטול לא נשמר במטייל, כי אין לכך שדה בעבודה</td><td data-label="מוגנת מ">טיול שאינו ב-<code>current_treks</code>; חישוב החזר אחרי המחיקה, כי השיעור מחושב לפני הקריאה ל-<code>cancel_registration</code></td></tr>
+          <tr><td class="name"><code>add_completed_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מעבירה טיול מ-<code>current_treks</code> ל-<code>completed_treks</code></td><td data-label="מוגנת מ">טיול שאינו ב-<code>current_treks</code>; טיול שהסטטוס שלו אינו "הושלם"; סימון כפול</td></tr>
+          <tr><td class="name"><code>request_private_tour</code><span class="type"><code>(guide, start_date, duration_days)</code></span></td><td data-label="מטרה">יוצרת טיול עם מקום אחד, משבצת את המדריך, רושמת את המטייל ומחזירה את הטיול. ראו שאלה 8</td><td data-label="מוגנת מ">אובייקט שאינו <code>Guide</code>; קלט תאריכים לא תקין; מטייל או מדריך לא פנויים, שנבדקים לפני יצירת הטיול; מזהה כפול, כי המזהה מחושב ממזהה המטייל ומתאריך היציאה, בלי מונה: <code>traveler_id*1000000+start_date.toordinal()</code> <span class="pill warn">הנחה</span></td></tr>
+          <tr><td class="name"><code>is_available</code><span class="type"><code>(start_date, duration_days, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם אין חפיפה עם <code>current_treks</code>. הפרמטר השלישי הוא <span class="pill warn">תוספת</span>, והקריאה שהעבודה מגדירה ממשיכה לעבוד</td><td data-label="מוגנת מ">תאריכים לא תקינים, דרך <code>check_dates</code>; חפיפה של טיול עם עצמו ב-<code>set_dates</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>generate_payment_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">דוח לפי סוג מנוי: הטיולים הנוכחיים והטיולים שהושלמו, מחיר סופי וסכום כולל, ולכל טיול נוכחי דמי הביטול אם יבוטל היום, לפי <code>calculate_refund_rate</code>. הנחה מוצעת: basic 0%, annual 10%, premium 20% <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">קריסה אצל מטייל בלי טיולים, שמקבל 0; ספירה כפולה של טיול. לא משנה מצב</td></tr>
+          <tr data-kind="added"><td class="name"><code>get_final_price</code><span class="type"><code>(trek)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">המחיר אחרי הנחת המנוי, במקום אחד לדוח התשלומים ולדוח המנויים</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>; שני דוחות עם מספרים שונים; דריסה של <code>trek.price</code></td></tr>
+          <tr data-kind="added"><td class="name"><code>get_priority</code><span class="type"><code>()</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה את הקדימות בהמתנה לפי סוג המנוי</td><td data-label="מוגנת מ">פיזור הידע על מנויים ל-<code>Trek</code>. לא משנה מצב</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>כל פרטי המטייל חובה; רשימות נפתחות ריקות ב-<code>__init__</code></td></tr>
+        <tr><td class="name">עקביות</td><td>טיול נמצא ב-<code>current_treks</code> או ב-<code>completed_treks</code>, לא בשתיהן; החישובים משתמשים באותו מחיר סופי</td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td>אין חפיפה בין טיולים; ביטול רק לטיול שרשומים אליו; סימון כהושלם רק לטיול נוכחי</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td>בסיום או בביטול טיול הוא יוצא מיד מ-<code>current_treks</code>; דוח מחושב בזמן הקריאה ולא נשמר</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>מחיר סופי ודמי ביטול מחושבים במקום אחד, בזמן הקריאה. דמי ביטול הם מחיר אחרי הנחה כפול 1 פחות שיעור ההחזר (הנחה)</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>מזהה שלם וחיובי, שם לא ריק, גיל חיובי, <code>membership_type</code> מתוך שלושת הסוגים, <code>experience_level</code> באותו סולם של הקושי</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>גיל שלילי, סוג מנוי לא קיים או שם ריק.</li>
+        <li>ביטול של טיול שלא רשומים אליו, או סימון כהושלם של טיול כזה.</li>
+        <li>טיול פרטי כשהמדריך תפוס.</li>
+        <li>דוח תשלומים של מטייל בלי טיולים מחזיר 0, ולא קורס.</li>
+      </ul>
+    </div>
+    <p class="note"><strong>המחיר של בלי שדה נוסף:</strong> ביטול שכבר בוצע לא מופיע בדוח התשלומים, כי הטיול יוצא מ-<code>current_treks</code> ואין איפה לשמור אותו. <code>cancel_trek</code> מחזירה את שיעור ההחזר, והקוד הקורא יכול לחשב ממנו את דמי הביטול ולהציג אותם.</p>
+  </section>
+
+  <section class="class-band" id="guide">
+    <h2><code>Guide</code></h2>
+    <p><strong>אחריות:</strong> פרטי המדריך, הטיולים המשובצים והסטטיסטיקה שלו. השיבוץ עצמו מתבצע ב-<code>Trek.assign_guide</code>.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, ו-<code>assigned_treks</code> משתנה רק דרך <code>Trek.assign_guide</code> ו-<code>remove_trek</code></td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td>מדריך מחזיק רשימה של <code>Trek</code>, והטיול מחזיק הפניה חזרה למדריך. שני הצדדים מתעדכנים יחד</td></tr>
+        <tr><td class="name">אובייקטים מתקשרים</td><td><code>assign_trek(trek)</code> רק קוראת ל-<code>trek.assign_guide(self)</code></td></tr>
+        <tr><td class="name">הורשה</td><td>אם תאשר את שאלה 6: <code>Guide(Person)</code>, עם אותו מבנה כמו <code>Traveler</code></td></tr>
+        <tr><td class="name">שמות משותפים</td><td><code>is_available</code> עם אותה חתימה כמו ב-<code>Traveler</code></td></tr>
+        <tr><td class="name">שימוש חוזר</td><td>ההתמחויות נבדקות מול <code>Trek.VALID_REGIONS</code>, והחפיפה מ-<code>Trek.overlaps</code>, בלי עותק של הלוגיקה</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>guide_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של המדריך</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי; מזהה כפול</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0. כפילות: <code>Agency.add_guide</code></td></tr>
+          <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">השם המלא</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>name.strip()</code></td></tr>
+          <tr><td class="name"><code>specialties</code><span class="type"><code>list</code> של <code>str</code></span></td><td data-label="מתאר">האזורים שהוא מתמחה בהם</td><td data-label="מוגן מ">רשימה ריקה; אזור לא מוכר; מחרוזת במקום רשימה; שינוי של הרשימה על ידי הקוד הקורא אחרי היצירה</td><td data-label="נאכף">בנאי: <code>type is list</code>, לפחות פריט אחד, כל פריט מ-<code>Trek.VALID_REGIONS</code>, ושמירה של עותק</td></tr>
+          <tr><td class="name"><code>certification_level</code><span class="type"><code>int</code>, 1 עד 5</span></td><td data-label="מתאר">דרגת ההסמכה</td><td data-label="מוגן מ">טקסט, <code>True</code>, ערך מחוץ לסולם</td><td data-label="נאכף">בנאי: <code>type is int</code> וטווח. הסולם הוא <span class="pill warn">הנחה</span>, כי העבודה לא מגדירה אותו. מופיע בדוח בלבד</td></tr>
+          <tr><td class="name"><code>assigned_treks</code><span class="type"><code>list</code> של <code>Trek</code></span></td><td data-label="מתאר">הטיולים המשובצים לו</td><td data-label="מוגן מ">שיתוף רשימה בין מדריכים; טיול שמשובץ כאן אבל <code>trek.guide</code> שלו הוא מדריך אחר</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. <code>Trek.assign_guide</code> מוסיפה, ו-<code>remove_trek</code> מסירה ומעדכנת את שני הצדדים</td></tr>
+          <tr><td class="name"><code>experience_years</code><span class="type"><code>int</code>, 0 ומעלה</span></td><td data-label="מתאר">שנות הניסיון</td><td data-label="מוגן מ">טקסט, <code>True</code>, מספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול או שווה ל-0</td></tr>
+          <tr><td class="name"><code>max_monthly_treks</code><span class="type"><code>int</code>, לפחות 1</span></td><td data-label="מתאר">מספר הטיולים המקסימלי בחודש</td><td data-label="מוגן מ">טקסט, <code>True</code>, אפס ומספר שלילי; שיבוץ מעבר למגבלה</td><td data-label="נאכף">בנאי: <code>type is int</code> ולפחות 1. המגבלה: <code>assign_guide</code> ו-<code>set_dates</code>, לפי חודש היציאה <span class="pill warn">הנחה</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר מדריך תקין, עם עותק של ההתמחויות ורשימת טיולים ריקה</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות, לפני ההשמות</td></tr>
+          <tr><td class="name"><code>assign_trek</code><span class="type"><code>(trek)</code></span></td><td data-label="מטרה">המדריך משבץ את עצמו, דרך <code>trek.assign_guide(self)</code></td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>. שאר הבדיקות ב-<code>Trek</code>, כך שאין דרך לעקוף אותן</td></tr>
+          <tr><td class="name"><code>remove_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מסירה טיול מהשיבוץ, ו-<code>trek.guide</code> חוזר ל-<code>None</code></td><td data-label="מוגנת מ">מזהה שלא משובץ אצלו; עדכון של צד אחד בלבד; טיול שהושלם, כדי שהסטטיסטיקה תישאר נכונה <span class="pill warn">הנחה</span></td></tr>
+          <tr><td class="name"><code>is_available</code><span class="type"><code>(start_date, duration_days, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם אין חפיפה עם הטיולים המשובצים. הפרמטר השלישי הוא <span class="pill warn">תוספת</span></td><td data-label="מוגנת מ">תאריכים לא תקינים, דרך <code>check_dates</code>; חפיפה של טיול עם עצמו. לא משנה מצב. המגבלה החודשית נבדקת בנפרד ב-<code>assign_guide</code></td></tr>
+          <tr><td class="name"><code>analyze_guiding_statistics</code><span class="type"><code>()</code></span></td><td data-label="מטרה">דוח עם לפחות שלושה גורמים. הצעה: מספר טיולים שהושלמו, ממוצע תפוסה ופיזור אזורים</td><td data-label="מוגנת מ">חלוקה באפס אצל מדריך בלי טיולים; ספירה של טיול שבוטל. לא משנה מצב</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>יש לפחות התמחות אחת; רשימת ההתמחויות מועתקת ב-<code>__init__</code> כדי לא לשתף רשימה עם הקוד הקורא</td></tr>
+        <tr><td class="name">עקביות</td><td>טיול נמצא ב-<code>assigned_treks</code> רק אם <code>trek.guide</code> הוא המדריך הזה; התמחויות משתמשות ברשימת האזורים של <code>Trek</code></td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td>אין חפיפה בין טיולים; לא עוברים את <code>max_monthly_treks</code> בחודש של תאריך היציאה (הנחה); האזור בהתמחויות</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td>ביטול טיול מוציא אותו מיד מ-<code>assigned_treks</code>; שינוי תאריכים נבדק מול הלוח העדכני</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>ממוצעים בדוח לא מחלקים באפס; טיול שבוטל לא נספר</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>מזהה שלם וחיובי, שם לא ריק, <code>experience_years</code> אפס ומעלה, <code>max_monthly_treks</code> לפחות 1, <code>certification_level</code> מסולם מתועד</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>שיבוץ מחוץ לאזורי ההתמחות, בחפיפה, או מעבר למגבלה החודשית.</li>
+        <li>שיבוץ לטיול שכבר יש לו מדריך, או הסרה של טיול שלא משובץ אצלו.</li>
+        <li>דוח סטטיסטיקה של מדריך בלי טיולים מסתיים בלי חלוקה באפס.</li>
+      </ul>
+    </div>
+    <p class="note"><code>certification_level</code> מופיע בדוח בלבד. העבודה לא מבקשת לבדוק אותו מול דרגת הקושי, אז לא נוסיף דרישה כזו.</p>
+  </section>
+
+  <section class="class-band" id="agency">
+    <h2><code>Agency</code></h2>
+    <p><strong>אחריות:</strong> מחזיקה את המאגרים ומפיקה דוחות, בדומה ל-<code>Library</code> בתרגול. היא לא משכפלת חישובים של המחלקות האחרות.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">מחלקה מכילה</td><td>כמו <code>Library</code>: שלוש רשימות של אובייקטים, עם שיטות להוספה, לחיפוש ולדוחות</td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td>סוכנות מחזיקה מטיילים, מדריכים וטיולים, והם אינם סוג של סוכנות, ולכן אין כאן הורשה</td></tr>
+        <tr><td class="name">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, והוספה למאגר עוברת רק דרך <code>add_traveler</code>, <code>add_guide</code> ו-<code>add_trek</code></td></tr>
+        <tr><td class="name">תת-מחלקות</td><td>הבדיקה היא <code>isinstance</code>, כך שגם תת-מחלקה של <code>Trek</code> תתקבל. זה מה ש-Liskov דורש</td></tr>
+        <tr><td class="name">אחריות יחידה</td><td>הדוחות קוראים ל-<code>get_final_price</code> ול-<code>overlaps</code>, ולא מחשבים מחדש. כך <code>Agency</code> לא הופכת ל-God Object</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">שם הסוכנות</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>name.strip()</code></td></tr>
+          <tr><td class="name"><code>travelers</code><span class="type"><code>list</code> של <code>Traveler</code></span></td><td data-label="מתאר">מאגר המטיילים</td><td data-label="מוגן מ">אובייקט מסוג אחר; מזהה כפול; שיתוף רשימה בין סוכנויות</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>add_traveler</code></td></tr>
+          <tr><td class="name"><code>guides</code><span class="type"><code>list</code> של <code>Guide</code></span></td><td data-label="מתאר">מאגר המדריכים</td><td data-label="מוגן מ">אובייקט מסוג אחר; מזהה כפול; שיתוף רשימה בין סוכנויות</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>add_guide</code></td></tr>
+          <tr><td class="name"><code>treks</code><span class="type"><code>list</code> של <code>Trek</code></span></td><td data-label="מתאר">מאגר הטיולים</td><td data-label="מוגן מ">אובייקט מסוג אחר; מזהה כפול; טיול שהמדריך שלו לא במאגר</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>add_trek</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר סוכנות עם שם ושלושה מאגרים ריקים</td><td data-label="מוגנת מ">שם לא תקין; רשימות משותפות בין סוכנויות</td></tr>
+          <tr><td class="name"><code>add_traveler</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">מוסיפה מטייל למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>; מזהה שכבר קיים</td></tr>
+          <tr><td class="name"><code>add_guide</code><span class="type"><code>(guide)</code></span></td><td data-label="מטרה">מוסיפה מדריך למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Guide</code>; מזהה שכבר קיים</td></tr>
+          <tr><td class="name"><code>add_trek</code><span class="type"><code>(trek)</code></span></td><td data-label="מטרה">מוסיפה טיול למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>; מזהה שכבר קיים; טיול עם מדריך שלא במאגר</td></tr>
+          <tr><td class="name"><code>generate_season_schedule_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">טיולים לפי תאריך, עם התראה על חפיפה אצל אותו מדריך או מטייל <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">קריסה על טיול בלי מדריך או על סוכנות ריקה; התראה על טיול שבוטל; חישוב חפיפה נוסף, כי הוא משתמש ב-<code>overlaps</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>search_treks</code><span class="type"><code>(search_term)</code></span></td><td data-label="מטרה">טקסט מחפש בשם, באזור ובשם המדריך, ומספר שלם מחפש בדרגת הקושי. אם אין התאמות, מחזירה רשימה ריקה</td><td data-label="מוגנת מ">סוג אחר, כולל <code>True</code>; מחרוזת ריקה, שהייתה מתאימה לכל טיול; קריסה ב-<code>trek.guide.name</code> כשאין מדריך. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>generate_membership_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">כמות לפי סוג מנוי, מטיילים פעילים (יש להם טיול נוכחי) והכנסה צפויה</td><td data-label="מוגנת מ">קריסה על סוכנות ריקה; ספירה של טיול שבוטל בהכנסה; מחיר שונה מזה שרואה המטייל, כי הוא משתמש ב-<code>get_final_price</code>. לא משנה מצב</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>אין מזהה כפול באף מאגר; אם לטיול שנוסף כבר יש מדריך, גם המדריך צריך להיות במאגר</td></tr>
+        <tr><td class="name">עקביות</td><td>מחיר סופי מגיע מ-<code>get_final_price</code> וחפיפה מ-<code>Trek</code>, כדי שדוח ומטייל לא יציגו מספרים שונים</td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td>הוספה למאגר רק של אובייקט מהסוג הנכון; החיפוש לא משנה מצב</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td>כל דוח מחושב מחדש בכל קריאה, ושום תוצאה לא נשמרת</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>טיולים שבוטלו לא נספרים בהכנסה הצפויה ובהתראות החפיפה</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td><code>name</code> לא ריק; <code>search_term</code> הוא מחרוזת לא ריקה או מספר שלם</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>הוספת מזהה כפול, או אובייקט מסוג לא נכון.</li>
+        <li>חיפוש כשקיים טיול בלי מדריך. בלי טיפול, <code>trek.guide.name</code> קורס.</li>
+        <li>דוחות על סוכנות ריקה.</li>
+        <li>שני טיולים חופפים של אותו מטייל או מדריך שנוספו ישירות, כדי לראות את ההתראה בדוח.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="class-band" id="extension">
+    <h2>שתי המחלקות החדשות</h2>
+    <p>העבודה דורשת לפחות שתי מחלקות חדשות לבחירתכם, עם שדות ומתודות. זו הצעה בלבד, על בסיס שתי הדוגמאות שבעבודה (שאלה 7). שתיהן קומפוזיציה, כי טיול אינו סוג של ציוד או הסעה. הקשר לטיול נשמר בשדות של המחלקות החדשות, כדי לא להוסיף שדה ל-<code>Trek</code>. פירוט מלא לכל שדה ושיטה ייכתב אחרי שתבחר.</p>
+    <div class="table-wrap">
+      <table class="stack">
+        <thead><tr><th class="method">מחלקה</th><th>שדות עיקריים</th><th>בדיקות מרכזיות</th><th>דחייה להדגמה</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>Equipment</code></td><td data-label="שדות">מזהה, שם, כמות כוללת, כמות פנויה</td><td data-label="בדיקות">השאלה והחזרה: הכמות הפנויה תמיד בין 0 לכמות הכוללת; החזרה בביטול טיול</td><td data-label="דחייה">השאלה מעבר למלאי; החזרה של יותר ממה שהושאל</td></tr>
+          <tr><td class="name"><code>Transport</code></td><td data-label="שדות">מזהה, נקודת איסוף, מקומות, טיול משויך</td><td data-label="בדיקות">מספר המקומות מספיק ל-<code>max_participants</code>; רכב לא משויך לשני טיולים חופפים</td><td data-label="דחייה">רכב קטן מדי; שיוך בחפיפה</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </div>
+</div>
+<script>
+  (function () {
+    var ownerPage = { skill: "skill", protocol: "protocol", classes: "classes", questions: "protocol",
+      enforcement: "classes", trek: "classes", traveler: "classes", guide: "classes", agency: "classes", extension: "classes" };
+    function route() {
+      var name = location.hash.slice(1);
+      var page = ownerPage[name] || "skill";
+      ["skill", "protocol", "classes"].forEach(function (p) {
+        document.getElementById("page-" + p).hidden = p !== page;
+      });
+      document.querySelectorAll(".topbar a").forEach(function (a) {
+        if (a.dataset.page === page) { a.setAttribute("aria-current", "page"); }
+        else { a.removeAttribute("aria-current"); }
+      });
+      var target = name !== page && document.getElementById(name);
+      if (target) { target.scrollIntoView(); } else { window.scrollTo(0, 0); }
+    }
+    window.addEventListener("hashchange", route);
+    route();
+  })();
+  </script>
+</body>
+</html>
