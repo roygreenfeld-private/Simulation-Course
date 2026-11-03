@@ -115,9 +115,35 @@ class Trek:
         self.guide=guide
         guide.assigned_treks.append(self)
 
-    # Sets new dates only if the guide and every participant can make them, otherwise the old dates stay
-    def set_dates(self, start_date, duration_days):
+    # Rejects anything that is not a vehicle assigned to this trek, checking shared names for the same reason as check_traveler
+    def check_vehicle(self, vehicle):
+        if not hasattr(vehicle, "transport_id"):
+            raise ValueError(f"Invalid vehicle: {vehicle}")
+        if not vehicle.is_assigned_to(self.trek_id):
+            raise ValueError(f"Vehicle {vehicle.transport_id} is not assigned to trek {self.trek_id}")
+
+    # Rejects anything that is not equipment on loan to this trek, checking shared names for the same reason as check_traveler
+    def check_equipment(self, item):
+        if not hasattr(item, "equipment_id"):
+            raise ValueError(f"Invalid equipment: {item}")
+        if not item.is_loaned_to(self.trek_id):
+            raise ValueError(f"Equipment {item.equipment_id} is not on loan to trek {self.trek_id}")
+
+    # Sets new dates only if the guide, every participant and the given vehicles and equipment can make them, otherwise the old dates stay; a trek has no field for those two, so the calling code passes them
+    def set_dates(self, start_date, duration_days, vehicles=None, equipment=None):
         Trek.check_dates(start_date, duration_days)
+        if vehicles is None:
+            vehicles=[]
+        if equipment is None:
+            equipment=[]
+        if type(vehicles) is not list:
+            raise ValueError(f"Invalid vehicles: {vehicles}")
+        if type(equipment) is not list:
+            raise ValueError(f"Invalid equipment: {equipment}")
+        for vehicle in vehicles:
+            self.check_vehicle(vehicle)
+        for item in equipment:
+            self.check_equipment(item)
         if not self.is_active():
             raise ValueError(f"Cannot change the dates of a {self.status} trek")
         # The trek's own id is ignored, otherwise it would conflict with itself
@@ -129,6 +155,12 @@ class Trek:
         for traveler in self.participants:
             if not traveler.is_available(start_date, duration_days, self.trek_id):
                 raise ValueError(f"Traveler {traveler.traveler_id} is not available on these dates")
+        for vehicle in vehicles:
+            if not vehicle.is_available(start_date, duration_days, self.trek_id):
+                raise ValueError(f"Vehicle {vehicle.transport_id} is not available on these dates")
+        for item in equipment:
+            if not item.can_supply(self.trek_id, start_date, duration_days):
+                raise ValueError(f"Equipment {item.equipment_id} is not available on these dates")
 
         self.start_date=start_date
         self.duration_days=duration_days

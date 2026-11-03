@@ -253,11 +253,11 @@ td .pill { white-space: nowrap; }
       <div class="blaze" aria-hidden="true"><i></i><i></i><i></i></div>
       <h1>פרוטוקול העבודה של סוכנות הטיולים</h1>
       <p class="lead">כללים שחלים על כל המערכת: מה גובר על מה, באיזה סדר כותבים מתודה, ואיך שומרים על נתונים אמינים בין המחלקות.</p>
-      <span class="pill warn draft">טיוטה לאישור. <code>Trek</code> ו-<code>Traveler</code> נכתבו, ושאר המחלקות עדיין לא</span>
+      <span class="pill warn draft">כל המחלקות נכתבו. שאלות 2, 3, 5, 6 ו-8 עדיין מחכות לאישור</span>
       <dl class="facts">
         <div><dd>6</dd><dt>עקרונות ולידציה</dt></div>
         <div><dd>4</dd><dt>שלבים בכל מתודה שמשנה מצב</dt></div>
-        <div><dd>6</dd><dt>שאלות שמחכות לתשובה</dt></div>
+        <div><dd>5</dd><dt>שאלות שמחכות לתשובה</dt></div>
       </dl>
     </header>
 
@@ -324,7 +324,7 @@ td .pill { white-space: nowrap; }
             <tr><td class="name">רישום לטיול</td><td data-label="מבצע"><code>Trek.register</code></td><td data-label="קורא"><code>Traveler.register_to_trek</code></td></tr>
             <tr><td class="name">ביטול רישום</td><td data-label="מבצע"><code>Trek.cancel_registration</code></td><td data-label="קורא"><code>Traveler.cancel_trek</code>, שמחשבת את שיעור ההחזר ומחזירה אותו</td></tr>
             <tr><td class="name">שיבוץ מדריך</td><td data-label="מבצע"><code>Trek.assign_guide</code></td><td data-label="קורא"><code>Guide.assign_trek</code></td></tr>
-            <tr><td class="name">חישוב חפיפה</td><td data-label="מבצע"><code>Trek</code></td><td data-label="קורא"><code>is_available</code> של <code>Traveler</code> ושל <code>Guide</code>, והדוח של <code>Agency</code></td></tr>
+            <tr><td class="name">חישוב חפיפה</td><td data-label="מבצע"><code>Trek</code></td><td data-label="קורא"><code>is_available</code> של <code>Traveler</code> ושל <code>Guide</code>, הדוח של <code>Agency</code>, <code>Equipment</code> ו-<code>Transport</code></td></tr>
             <tr><td class="name">מחיר סופי</td><td data-label="מבצע"><code>Traveler.get_final_price</code></td><td data-label="קורא">דוח התשלומים ודוח המנויים</td></tr>
           </tbody>
         </table>
@@ -344,7 +344,7 @@ td .pill { white-space: nowrap; }
 
     <section id="questions">
     <h2>שאלות פתוחות</h2>
-    <p class="note">שאלות 1 ו-4 אושרו. <code>Trek</code> נכתבה לפי ההמלצות של שאלות 2 ו-3, והן עדיין מחכות לאישור שלך, כמו שאר השאלות.</p>
+    <p class="note">שאלות 1, 4 ו-7 אושרו. <code>Trek</code> נכתבה לפי ההמלצות של שאלות 2 ו-3, והן עדיין מחכות לאישור שלך, כמו שאר השאלות.</p>
     <ol class="questions">
       <li>
         <span class="q">איפה לעבוד?</span>
@@ -379,7 +379,7 @@ td .pill { white-space: nowrap; }
       <li>
         <span class="q">אילו מחלקות חדשות לבנות?</span>
         <span>העבודה משאירה את הבחירה לכם, ויש ערך ברעיון מקורי יותר מהדוגמאות שלה.</span>
-        <span class="rec"><b>המלצה:</b> <code>Equipment</code> ו-<code>Transport</code>, אלא אם יש לך רעיון שמעניין אותך יותר.</span>
+        <span class="rec"><b>אושר:</b> <code>Equipment</code> ו-<code>Transport</code>, נכתבו לפי התכנון ב<a href="#extension">דף המחלקות</a>.</span>
       </li>
       <li>
         <span class="q">מה מחיר ואזור של טיול פרטי?</span>
@@ -394,7 +394,7 @@ td .pill { white-space: nowrap; }
       <div class="blaze" aria-hidden="true"><i></i><i></i><i></i></div>
       <h1>פרוטוקול לכל מחלקה</h1>
       <p class="lead">לכל מחלקה: איך מממשים בה OOP, מה כל שדה מתאר וממה הוא מוגן, ומה המטרה של כל שיטה וממה היא מוגנת.</p>
-      <span class="pill warn draft">טיוטה לאישור. <code>Trek</code> ו-<code>Traveler</code> נכתבו, ושאר המחלקות עדיין לא</span>
+      <span class="pill warn draft">כל המחלקות נכתבו. שאלות 2, 3, 5, 6 ו-8 עדיין מחכות לאישור</span>
       <dl class="facts">
         <div><dd>4</dd><dt>מחלקות שהעבודה דורשת</dt></div>
         <div><dd>31</dd><dt>שדות שהעבודה מגדירה</dt></div>
@@ -419,7 +419,7 @@ td .pill { white-space: nowrap; }
         </tbody>
       </table></div>
       <p><strong>מה זה לא מכסה:</strong> השמה ישירה מחוץ למחלקה. הרצתי את הקוד הקיים, ו-<code>trek.price = -5</code> או <code>trek.status = "banana"</code> עוברים בלי שגיאה, וזה נכון גם אחרי כתיבת <code>Trek</code>. כדי לחסום את זה צריך <code>@property</code>, וההכרעה הייתה שהתרגול מנצח. לכן הכלל הוא מוסכמה: קוד מחוץ למחלקה קורא שדות, אבל משנה אותם רק דרך שיטות.</p>
-      <p class="note"><code>Trek</code> ו-<code>Traveler</code> כתובות ב-<code>trek.py</code> וב-<code>traveler.py</code>, ומה שבטבלאות שלהן נבדק בהרצה, כשהן עובדות זו מול זו. <code>Guide</code> עוד לא נכתבה, ולכן השיבוץ נבדק מול מחלקת דמה, וצריך לבדוק אותו שוב מול המחלקה האמיתית. בשאר המחלקות הטבלאות הן תוכנית. <span class="pill warn">תוספת</span> מסמן שיטה או פרמטר שהעבודה לא מגדירה. שדות לא מוסיפים, ו<span class="pill warn">הנחה</span> מסמן החלטה שלנו במקום שהעבודה משאירה פתוח.</p>
+      <p class="note">כל המחלקות כתובות, כל אחת בקובץ משלה: <code>trek.py</code>, <code>traveler.py</code>, <code>guide.py</code>, <code>agency.py</code>, <code>equipment.py</code> ו-<code>transport.py</code>. מה שבטבלאות נבדק בהרצה, כשהן עובדות זו מול זו. <span class="pill warn">תוספת</span> מסמן שיטה או פרמטר שהעבודה לא מגדירה. שדות לא מוסיפים, ו<span class="pill warn">הנחה</span> מסמן החלטה שלנו במקום שהעבודה משאירה פתוח.</p>
     </section>
 
     <section class="class-band" id="trek">
@@ -468,7 +468,7 @@ td .pill { white-space: nowrap; }
         <tbody>
           <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר טיול תקין, בלי מדריך ובלי משתתפים, בסטטוס מתוכנן</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות. בודק לפני ההשמות, כך שלא נוצר אובייקט חלקי</td></tr>
           <tr><td class="name"><code>assign_guide</code><span class="type"><code>(guide)</code></span></td><td data-label="מטרה">משבצת מדריך ומעדכנת גם את <code>trek.guide</code> וגם את <code>guide.assigned_treks</code></td><td data-label="מוגנת מ">אובייקט שאינו <code>Guide</code>; טיול שבוטל או הושלם; טיול שכבר יש לו מדריך; אזור מחוץ להתמחויות; מדריך לא פנוי; חריגה מהמגבלה החודשית</td></tr>
-          <tr><td class="name"><code>set_dates</code><span class="type"><code>(start_date, duration_days)</code></span></td><td data-label="מטרה">קובעת מועד ומשך חדשים</td><td data-label="מוגנת מ">קלט לא תקין; טיול שבוטל או הושלם; התנגשות אצל המדריך או אצל רשום כלשהו; חריגה מהמגבלה החודשית של המדריך בחודש החדש; זיהוי חפיפה של הטיול עם עצמו. אם יש הפרה, התאריכים נשארים כשהיו</td></tr>
+          <tr><td class="name"><code>set_dates</code><span class="type"><code>(start_date, duration_days, vehicles=None, equipment=None)</code></span></td><td data-label="מטרה">קובעת מועד ומשך חדשים. שני הפרמטרים האחרונים הם <span class="pill warn">תוספת</span>: רשימות הרכבים והציוד של הטיול, שהקוד הקורא מעביר כי ל-<code>Trek</code> אין שדות כאלה</td><td data-label="מוגנת מ">קלט לא תקין; טיול שבוטל או הושלם; התנגשות אצל המדריך, אצל רשום כלשהו או אצל רכב ברשימה; ציוד שלא מספיק בתאריכים החדשים; רכב או ציוד שלא שייכים לטיול; חריגה מהמגבלה החודשית של המדריך בחודש החדש; זיהוי חפיפה של הטיול עם עצמו. אם יש הפרה, התאריכים נשארים כשהיו</td></tr>
           <tr><td class="name"><code>has_capacity</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם נשאר מקום</td><td data-label="מוגנת מ">אין קלט, והיא לא משנה מצב. היא סומכת על הערכים שהבנאי כבר בדק</td></tr>
           <tr><td class="name"><code>is_suitable</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">בודקת אם <code>experience_level</code> גדול או שווה ל-<code>difficulty_level</code> <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>. למטייל שלא מתאים היא מחזירה <code>False</code> ולא שגיאה</td></tr>
           <tr><td class="name"><code>register</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">רושמת מטייל, מעדכנת את שני הצדדים ומרעננת סטטוס</td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>; טיול שבוטל, הושלם או כבר יצא; רישום כפול; מטייל בהמתנה; רמה לא מתאימה; טיול מלא; חפיפה בלוח הזמנים. העדכון נעשה רק אחרי כל הבדיקות</td></tr>
@@ -486,6 +486,8 @@ td .pill { white-space: nowrap; }
           <tr data-kind="added"><td class="name"><code>get_end_date</code><span class="type"><code>()</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה את היום האחרון של הטיול</td><td data-label="מוגנת מ">טעות של יום בחישוב הסיום, כי יום הסיום נספר</td></tr>
           <tr data-kind="added"><td class="name"><code>is_guide_month_full</code><span class="type"><code>(guide, start_date)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> אם למדריך אין מקום בחודש הזה, בלי לספור את הטיול עצמו</td><td data-label="מוגנת מ">חישוב שונה של המגבלה ב-<code>assign_guide</code> וב-<code>set_dates</code></td></tr>
           <tr data-kind="added"><td class="name"><code>check_dates</code><span class="type"><code>(start_date, duration_days)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בדיקת תאריך ומשך במקום אחד, לבנאי, ל-<code>set_dates</code> ול-<code>is_available</code></td><td data-label="מוגנת מ">סוג תאריך לא נכון ומשך לא תקין, בלי לשכפל את הבדיקה</td></tr>
+          <tr data-kind="added"><td class="name"><code>check_vehicle</code><span class="type"><code>(vehicle)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בודקת שהפריט ברשימת הרכבים של <code>set_dates</code> הוא רכב שמשויך לטיול הזה</td><td data-label="מוגנת מ">אובייקט שאינו רכב; רכב של טיול אחר, שהיה חוסם הזזה בלי סיבה. בודקת לפי שם השדה, בלי ייבוא מעגלי</td></tr>
+          <tr data-kind="added"><td class="name"><code>check_equipment</code><span class="type"><code>(item)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">בודקת שהפריט ברשימת הציוד של <code>set_dates</code> מושאל לטיול הזה</td><td data-label="מוגנת מ">אובייקט שאינו ציוד; ציוד שלא הושאל לטיול. בודקת לפי שם השדה, בלי ייבוא מעגלי</td></tr>
           <tr data-kind="added"><td class="name"><code>overlaps</code><span class="type"><code>(start_date, duration_days)</code></span><span class="pill warn">תוספת</span></td><td data-label="מטרה">מחזירה <code>True</code> אם טווח התאריכים חופף לטיול. יום הסיום נספר</td><td data-label="מוגנת מ">שני חישובים שונים של חפיפה במחלקות שונות; טעות ביום הגבול. טיול בן יום אחד מסתיים באותו יום</td></tr>
         </tbody>
       </table></div>
@@ -610,7 +612,7 @@ td .pill { white-space: nowrap; }
         <tr><td class="name method">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, ו-<code>assigned_treks</code> משתנה רק דרך <code>Trek.assign_guide</code> ו-<code>remove_trek</code></td></tr>
         <tr><td class="name">הרכבה ("מחזיק ב")</td><td>מדריך מחזיק רשימה של <code>Trek</code>, והטיול מחזיק הפניה חזרה למדריך. שני הצדדים מתעדכנים יחד</td></tr>
         <tr><td class="name">אובייקטים מתקשרים</td><td><code>assign_trek(trek)</code> רק קוראת ל-<code>trek.assign_guide(self)</code></td></tr>
-        <tr><td class="name">הורשה</td><td>אם תאשר את שאלה 6: <code>Guide(Person)</code>, עם אותו מבנה כמו <code>Traveler</code></td></tr>
+        <tr><td class="name">הורשה</td><td>כרגע אין, כי שאלה 6 עדיין פתוחה. אם תאשר אותה: <code>Guide(Person)</code>, עם אותו מבנה כמו <code>Traveler</code></td></tr>
         <tr><td class="name">שמות משותפים</td><td><code>is_available</code> עם אותה חתימה כמו ב-<code>Traveler</code></td></tr>
         <tr><td class="name">שימוש חוזר</td><td>ההתמחויות נבדקות מול <code>Trek.VALID_REGIONS</code>, והחפיפה מ-<code>Trek.overlaps</code>, בלי עותק של הלוגיקה</td></tr>
       </tbody></table></div>
@@ -624,9 +626,9 @@ td .pill { white-space: nowrap; }
           <tr><td class="name"><code>guide_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של המדריך</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי; מזהה כפול</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0. כפילות: <code>Agency.add_guide</code></td></tr>
           <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">השם המלא</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>name.strip()</code></td></tr>
           <tr><td class="name"><code>specialties</code><span class="type"><code>list</code> של <code>str</code></span></td><td data-label="מתאר">האזורים שהוא מתמחה בהם</td><td data-label="מוגן מ">רשימה ריקה; אזור לא מוכר; מחרוזת במקום רשימה; שינוי של הרשימה על ידי הקוד הקורא אחרי היצירה</td><td data-label="נאכף">בנאי: <code>type is list</code>, לפחות פריט אחד, כל פריט מ-<code>Trek.VALID_REGIONS</code>, ושמירה של עותק</td></tr>
-          <tr><td class="name"><code>certification_level</code><span class="type"><code>int</code>, 1 עד 5</span></td><td data-label="מתאר">דרגת ההסמכה</td><td data-label="מוגן מ">טקסט, <code>True</code>, ערך מחוץ לסולם</td><td data-label="נאכף">בנאי: <code>type is int</code> וטווח. הסולם הוא <span class="pill warn">הנחה</span>, כי העבודה לא מגדירה אותו. מופיע בדוח בלבד</td></tr>
+          <tr><td class="name"><code>certification_level</code><span class="type"><code>int</code>, 1 עד 10</span></td><td data-label="מתאר">דרגת ההסמכה</td><td data-label="מוגן מ">טקסט, <code>True</code>, ערך מחוץ לסולם</td><td data-label="נאכף">בנאי: <code>type is int</code> וטווח. הסולם הוא החלטה שלך, כי העבודה לא מגדירה אותו. מופיע בדוח בלבד</td></tr>
           <tr><td class="name"><code>assigned_treks</code><span class="type"><code>list</code> של <code>Trek</code></span></td><td data-label="מתאר">הטיולים המשובצים לו</td><td data-label="מוגן מ">שיתוף רשימה בין מדריכים; טיול שמשובץ כאן אבל <code>trek.guide</code> שלו הוא מדריך אחר</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. <code>Trek.assign_guide</code> מוסיפה, ו-<code>remove_trek</code> מסירה ומעדכנת את שני הצדדים</td></tr>
-          <tr><td class="name"><code>experience_years</code><span class="type"><code>int</code>, 0 ומעלה</span></td><td data-label="מתאר">שנות הניסיון</td><td data-label="מוגן מ">טקסט, <code>True</code>, מספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול או שווה ל-0</td></tr>
+          <tr><td class="name"><code>experience_years</code><span class="type"><code>float</code>, 0 ומעלה</span></td><td data-label="מתאר">שנות הניסיון, גם חלקיות, כמו <code>2.5</code></td><td data-label="מוגן מ">טקסט, <code>True</code>, מספר שלילי; <code>nan</code> ו-<code>inf</code></td><td data-label="נאכף">בנאי: סוג, <code>math.isfinite</code> וגדול או שווה ל-0, כמו ב-<code>price</code>. גם מספר שלם כמו <code>5</code> מתקבל, ונשמר כ-<code>float</code></td></tr>
           <tr><td class="name"><code>max_monthly_treks</code><span class="type"><code>int</code>, לפחות 1</span></td><td data-label="מתאר">מספר הטיולים המקסימלי בחודש</td><td data-label="מוגן מ">טקסט, <code>True</code>, אפס ומספר שלילי; שיבוץ מעבר למגבלה</td><td data-label="נאכף">בנאי: <code>type is int</code> ולפחות 1. המגבלה: <code>assign_guide</code> ו-<code>set_dates</code>, לפי חודש היציאה <span class="pill warn">הנחה</span></td></tr>
         </tbody>
       </table></div>
@@ -641,7 +643,7 @@ td .pill { white-space: nowrap; }
           <tr><td class="name"><code>assign_trek</code><span class="type"><code>(trek)</code></span></td><td data-label="מטרה">המדריך משבץ את עצמו, דרך <code>trek.assign_guide(self)</code></td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>. שאר הבדיקות ב-<code>Trek</code>, כך שאין דרך לעקוף אותן</td></tr>
           <tr><td class="name"><code>remove_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מסירה טיול מהשיבוץ, ו-<code>trek.guide</code> חוזר ל-<code>None</code></td><td data-label="מוגנת מ">מזהה שלא משובץ אצלו; עדכון של צד אחד בלבד; טיול שהושלם, כדי שהסטטיסטיקה תישאר נכונה <span class="pill warn">הנחה</span></td></tr>
           <tr><td class="name"><code>is_available</code><span class="type"><code>(start_date, duration_days, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם אין חפיפה עם הטיולים המשובצים. הפרמטר השלישי הוא <span class="pill warn">תוספת</span></td><td data-label="מוגנת מ">תאריכים לא תקינים, דרך <code>check_dates</code>; חפיפה של טיול עם עצמו. לא משנה מצב. המגבלה החודשית נבדקת בנפרד ב-<code>assign_guide</code></td></tr>
-          <tr><td class="name"><code>analyze_guiding_statistics</code><span class="type"><code>()</code></span></td><td data-label="מטרה">דוח עם לפחות שלושה גורמים. הצעה: מספר טיולים שהושלמו, ממוצע תפוסה ופיזור אזורים</td><td data-label="מוגנת מ">חלוקה באפס אצל מדריך בלי טיולים; ספירה של טיול שבוטל. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>analyze_guiding_statistics</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מחזירה מילון עם ארבעה גורמים: טיולים שהושלמו, טיולים שעוד לא הושלמו, ממוצע התפוסה של הטיולים שהושלמו ופיזור האזורים. לצדם מופיעות דרגת ההסמכה ושנות הניסיון. <span class="pill warn">הנחה</span> הבחירה בגורמים היא שלנו, כפי שהעבודה מאפשרת</td><td data-label="מוגנת מ">חלוקה באפס אצל מדריך בלי טיולים שהושלמו, שמקבל ממוצע 0; ספירה של טיול שבוטל, כי ביטול מוציא אותו מהשיבוץ. לא משנה מצב</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -654,7 +656,7 @@ td .pill { white-space: nowrap; }
         <tr><td class="name">עמידה באילוצים</td><td>אין חפיפה בין טיולים; לא עוברים את <code>max_monthly_treks</code> בחודש של תאריך היציאה (הנחה); האזור בהתמחויות</td></tr>
         <tr><td class="name">עדכניות נתונים</td><td>ביטול טיול מוציא אותו מיד מ-<code>assigned_treks</code>; שינוי תאריכים נבדק מול הלוח העדכני</td></tr>
         <tr><td class="name">דיוק נתונים</td><td>ממוצעים בדוח לא מחלקים באפס; טיול שבוטל לא נספר</td></tr>
-        <tr><td class="name">ולידציית נתונים</td><td>מזהה שלם וחיובי, שם לא ריק, <code>experience_years</code> אפס ומעלה, <code>max_monthly_treks</code> לפחות 1, <code>certification_level</code> מסולם מתועד</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>מזהה שלם וחיובי, שם לא ריק, <code>experience_years</code> מספר סופי, אפס ומעלה, <code>max_monthly_treks</code> לפחות 1, <code>certification_level</code> מ-1 עד 10</td></tr>
       </tbody></table></div>
     </div>
 
@@ -665,6 +667,12 @@ td .pill { white-space: nowrap; }
         <li>שיבוץ לטיול שכבר יש לו מדריך, או הסרה של טיול שלא משובץ אצלו.</li>
         <li>דוח סטטיסטיקה של מדריך בלי טיולים מסתיים בלי חלוקה באפס.</li>
       </ul>
+    </div>
+    <div class="block">
+      <h3>מה זה <code>ignore_trek_id</code></h3>
+      <p>הפרמטר אומר ל-<code>is_available</code> איזה טיול לדלג עליו בבדיקת החפיפה. הוא נחוץ כשטיול קיים מזיז את התאריכים שלו, כי הטיול עדיין רשום בלוח של המדריך, בתאריכים הישנים.</p>
+      <p><strong>דוגמה:</strong> טיול 7 משובץ למדריך בימים 10 עד 12, וצריך להזיז אותו לימים 11 עד 13. בלי הפרמטר, הבדיקה מוצאת את טיול 7 עצמו בימים 11 ו-12, עונה שהמדריך תפוס, והשינוי נדחה בלי סיבה. לכן <code>Trek.set_dates</code> קוראת ל-<code>is_available(start_date, duration_days, self.trek_id)</code>: טיול 7 לא נספר, וכל טיול אחר של המדריך עדיין חוסם.</p>
+      <p>ברירת המחדל היא <code>None</code>, ואז לא מדלגים על אף טיול. כך נראית בדיקה רגילה, בשיבוץ או בהרשמה. <code>Traveler.is_available</code> עובדת באותה דרך, מאותה סיבה.</p>
     </div>
     <p class="note"><code>certification_level</code> מופיע בדוח בלבד. העבודה לא מבקשת לבדוק אותו מול דרגת הקושי, אז לא נוסיף דרישה כזו.</p>
   </section>
@@ -706,7 +714,9 @@ td .pill { white-space: nowrap; }
           <tr><td class="name"><code>add_traveler</code><span class="type"><code>(traveler)</code></span></td><td data-label="מטרה">מוסיפה מטייל למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Traveler</code>; מזהה שכבר קיים</td></tr>
           <tr><td class="name"><code>add_guide</code><span class="type"><code>(guide)</code></span></td><td data-label="מטרה">מוסיפה מדריך למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Guide</code>; מזהה שכבר קיים</td></tr>
           <tr><td class="name"><code>add_trek</code><span class="type"><code>(trek)</code></span></td><td data-label="מטרה">מוסיפה טיול למאגר</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>; מזהה שכבר קיים; טיול עם מדריך שלא במאגר</td></tr>
-          <tr><td class="name"><code>generate_season_schedule_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">טיולים לפי תאריך, עם התראה על חפיפה אצל אותו מדריך או מטייל <span class="pill warn">הנחה</span></td><td data-label="מוגנת מ">קריסה על טיול בלי מדריך או על סוכנות ריקה; התראה על טיול שבוטל; חישוב חפיפה נוסף, כי הוא משתמש ב-<code>overlaps</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>generate_season_schedule_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">טיולים מקובצים לפי עונה, ובכל עונה לפי תאריך, עם התראות על טיולים פעילים שיש להם יום משותף: באותו אזור, או בהגנה נוספת גם אצל אותו מדריך או מטייל <span class="pill warn">הנחה</span> אושרה</td><td data-label="מוגנת מ">קריסה על טיול בלי מדריך או על סוכנות ריקה; טיול שבוטל, שלא מופיע בדוח; התראה על טיול שהושלם, שמופיע בלוח בלבד; חישוב חפיפה נוסף, כי הוא משתמש ב-<code>overlaps</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>get_season</code><span class="type"><code>(start_date)</code></span></td><td data-label="מטרה">מחזירה את העונה לפי חודש התאריך: חורף דצמבר עד פברואר, אביב מרץ עד מאי, קיץ יוני עד אוגוסט, סתיו ספטמבר עד נובמבר. דצמבר מצטרף לינואר ולפברואר שאחריו, כמו <code>winter 2026-2027</code>. טיול שחוצה עונות נספר בעונת היציאה <span class="pill warn">תוספת</span> <span class="pill warn">הנחה</span> אושרה</td><td data-label="מוגנת מ">קלט שאינו <code>date</code>, כולל <code>datetime</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>get_overlap_reasons</code><span class="type"><code>(first, second)</code></span></td><td data-label="מטרה">מחזירה את הסיבות להתראה על שני טיולים חופפים. אזור הוא המקרה שהמערכת מאפשרת, ואותו מדריך או מטייל נחסמים כבר קודם, ויופיעו רק אחרי שינוי ישיר של שדה <span class="pill warn">תוספת</span></td><td data-label="מוגנת מ">קריסה על טיול בלי מדריך; התראה על שני טיולים באזורים שונים בלי אדם משותף. לא משנה מצב</td></tr>
           <tr><td class="name"><code>search_treks</code><span class="type"><code>(search_term)</code></span></td><td data-label="מטרה">טקסט מחפש בשם, באזור ובשם המדריך, ומספר שלם מחפש בדרגת הקושי. אם אין התאמות, מחזירה רשימה ריקה</td><td data-label="מוגנת מ">סוג אחר, כולל <code>True</code>; מחרוזת ריקה, שהייתה מתאימה לכל טיול; קריסה ב-<code>trek.guide.name</code> כשאין מדריך. לא משנה מצב</td></tr>
           <tr><td class="name"><code>generate_membership_report</code><span class="type"><code>()</code></span></td><td data-label="מטרה">כמות לפי סוג מנוי, מטיילים פעילים (יש להם טיול נוכחי) והכנסה צפויה</td><td data-label="מוגנת מ">קריסה על סוכנות ריקה; ספירה של טיול שבוטל בהכנסה; מחיר שונה מזה שרואה המטייל, כי הוא משתמש ב-<code>get_final_price</code>. לא משנה מצב</td></tr>
         </tbody>
@@ -731,22 +741,163 @@ td .pill { white-space: nowrap; }
         <li>הוספת מזהה כפול, או אובייקט מסוג לא נכון.</li>
         <li>חיפוש כשקיים טיול בלי מדריך. בלי טיפול, <code>trek.guide.name</code> קורס.</li>
         <li>דוחות על סוכנות ריקה.</li>
-        <li>שני טיולים חופפים של אותו מטייל או מדריך שנוספו ישירות, כדי לראות את ההתראה בדוח.</li>
+        <li>שני טיולים חופפים באותו אזור מקבלים התראה בדוח, ובאזורים שונים לא.</li>
       </ul>
+      <p class="note"><strong>מגבלות:</strong> טיול פרטי נכנס לדוחות רק אחרי <code>add_trek</code> בקוד הקורא. <code>add_trek</code> בודקת את המדריך רק ברגע ההוספה, ומדריך ששובץ אחר כך לא נבדק מול המאגר, כי השיבוץ מתבצע ב-<code>Trek</code>, שלא מכירה את הסוכנות.</p>
     </div>
   </section>
 
   <section class="class-band" id="extension">
     <h2>שתי המחלקות החדשות</h2>
-    <p>העבודה דורשת לפחות שתי מחלקות חדשות לבחירתכם, עם שדות ומתודות. זו הצעה בלבד, על בסיס שתי הדוגמאות שבעבודה (שאלה 7). שתיהן קומפוזיציה, כי טיול אינו סוג של ציוד או הסעה. הקשר לטיול נשמר בשדות של המחלקות החדשות, כדי לא להוסיף שדה ל-<code>Trek</code>. פירוט מלא לכל שדה ושיטה ייכתב אחרי שתבחר.</p>
-    <div class="table-wrap">
-      <table class="stack">
-        <thead><tr><th class="method">מחלקה</th><th>שדות עיקריים</th><th>בדיקות מרכזיות</th><th>דחייה להדגמה</th></tr></thead>
+    <p>העבודה דורשת לפחות שתי מחלקות חדשות לבחירתכם, עם שדות ומתודות. שתיהן נכתבו לפי התכנון שאושר, על בסיס שתי הדוגמאות שבעבודה (שאלה 7). הכללים הם אותם כללים: שדות ציבוריים, <code>ValueError</code> לפני כל שינוי, <code>type is</code> לערכים פשוטים, <code>isinstance</code> לאובייקטים, חישוב חפיפה רק ב-<code>Trek</code>, ושורת הערה באנגלית מעל כל שדה ושיטה.</p>
+
+    <div class="block">
+      <h3>החלטות משותפות לשתי המחלקות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">החלטה</th><th>מה קובעים</th><th>למה</th></tr></thead>
         <tbody>
-          <tr><td class="name"><code>Equipment</code></td><td data-label="שדות">מזהה, שם, כמות כוללת, כמות פנויה</td><td data-label="בדיקות">השאלה והחזרה: הכמות הפנויה תמיד בין 0 לכמות הכוללת; החזרה בביטול טיול</td><td data-label="דחייה">השאלה מעבר למלאי; החזרה של יותר ממה שהושאל</td></tr>
-          <tr><td class="name"><code>Transport</code></td><td data-label="שדות">מזהה, נקודת איסוף, מקומות, טיול משויך</td><td data-label="בדיקות">מספר המקומות מספיק ל-<code>max_participants</code>; רכב לא משויך לשני טיולים חופפים</td><td data-label="דחייה">רכב קטן מדי; שיוך בחפיפה</td></tr>
+          <tr><td class="name">הקשר לטיול</td><td data-label="קובעים">נשמר רק במחלקה החדשה, שמחזיקה הפניה ל-<code>Trek</code></td><td data-label="למה">אסור להוסיף שדה ל-<code>Trek</code></td></tr>
+          <tr><td class="name">קבצים וייבוא</td><td data-label="קובעים"><code>equipment.py</code> ו-<code>transport.py</code> מייבאים את <code>Trek</code>, ו-<code>Trek</code> לא מייבאת אותן</td><td data-label="למה">ייבוא בכיוון אחד, כמו ב-<code>Guide</code> וב-<code>Traveler</code></td></tr>
+          <tr><td class="name">ביטול וסיום טיול</td><td data-label="קובעים">טיול שבוטל או הושלם לא נספר, לפי <code>trek.is_active()</code> בכל חישוב</td><td data-label="למה"><code>Trek</code> לא מכירה את המחלקות החדשות ולא יכולה להודיע להן. כך הציוד והרכב מתפנים בלי קריאה נוספת</td></tr>
+          <tr><td class="name">הזזת טיול</td><td data-label="קובעים"><code>set_dates</code> מקבלת את רשימות הרכבים והציוד, ונדחית אם רכב תפוס או אם הציוד לא מספיק, בלי לשנות כלום. <code>find_conflicts</code> היא רשת ביטחון</td><td data-label="למה"><code>Trek</code> לא יודעת מה משויך אליה, כי אסור להוסיף לה שדה. לכן מה שהקוד הקורא לא העביר ברשימה לא נבדק בהזזה, ומתגלה רק ב-<code>find_conflicts</code></td></tr>
+          <tr><td class="name">מאגרים</td><td data-label="קובעים">הסימולציה מחזיקה את האובייקטים, והיא אחראית למזהים ייחודיים</td><td data-label="למה">אסור להוסיף שדות ל-<code>Agency</code></td></tr>
+          <tr><td class="name">מחלקת בסיס</td><td data-label="קובעים">אין. שתיהן מחלקות עצמאיות</td><td data-label="למה">טיול אינו סוג של ציוד או הסעה, והדמיון קטן מכדי להצדיק היררכיה</td></tr>
         </tbody>
-      </table>
+      </table></div>
+      <p class="note"><strong>מה השתנה מההצעה הקודמת:</strong> ירדה "כמות פנויה", כי היא תלויה בתאריכים ומחושבת בשיטה. ירדו גם "טיול משויך" יחיד ונקודת איסוף קבועה ברכב, כי אותו רכב משרת כמה טיולים, מנקודות שונות.</p>
+    </div>
+
+    <h3><code>Equipment</code></h3>
+    <p><strong>אחריות:</strong> מלאי של פריט ציוד אחד והשאלות שלו לטיולים, למשל 20 אוהלים. הפריט פנוי או תפוס לפי תאריכים, כך שאוהל שהושאל במרץ פנוי ביוני.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, ו-<code>loans</code> משתנה רק דרך <code>loan_to_trek</code> ו-<code>return_from_trek</code></td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td>כל השאלה מחזיקה הפניה ל-<code>Trek</code> וכמות. הציוד אינו סוג של טיול, והטיול אינו סוג של ציוד</td></tr>
+        <tr><td class="name">אובייקטים מתקשרים</td><td>החישובים קוראים ל-<code>trek.overlaps</code> ול-<code>trek.is_active</code>, בלי עותק של הלוגיקה</td></tr>
+        <tr><td class="name">אחריות יחידה</td><td>המלאי נמצא כאן בלבד, ו-<code>Trek</code> לא משתנה בכלל</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>equipment_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של פריט הציוד</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0</td></tr>
+          <tr><td class="name"><code>name</code><span class="type"><code>str</code></span></td><td data-label="מתאר">שם הפריט, כמו "אוהל"</td><td data-label="מוגן מ">סוג שאינו מחרוזת; שם ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>name.strip()</code></td></tr>
+          <tr><td class="name"><code>total_quantity</code><span class="type"><code>int</code>, לפחות 1</span></td><td data-label="מתאר">כמה יחידות יש לסוכנות</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> ולפחות 1</td></tr>
+          <tr><td class="name"><code>loans</code><span class="type"><code>list</code> של <code>dict</code></span></td><td data-label="מתאר">ההשאלות, כל אחת עם <code>trek</code> ו-<code>quantity</code></td><td data-label="מוגן מ">שיתוף רשימה בין פריטים; השאלה מעבר למלאי; שתי השאלות לאותו טיול</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>loan_to_trek</code> ו-<code>return_from_trek</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר פריט תקין בלי השאלות</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות, לפני ההשמות</td></tr>
+          <tr><td class="name"><code>get_quantity_on_loan</code><span class="type"><code>(day, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה כמה יחידות מושאלות ביום אחד, לפי הטיולים הפעילים. עליה נשענות שתי השיטות שסופרות זמינות</td><td data-label="מוגנת מ">ספירה של טיול שבוטל או הושלם; תאריך לא תקין, דרך <code>overlaps</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>get_available_quantity</code><span class="type"><code>(start_date, duration_days, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה כמה יחידות פנויות לאורך כל הטווח. בודקת כל יום בנפרד ולוקחת את היום העמוס ביותר, כי שתי השאלות באותו טווח לא בהכרח נמשכות באותם ימים</td><td data-label="מוגנת מ">תאריכים לא תקינים, דרך <code>Trek.check_dates</code>; ספירה של טיול שבוטל או הושלם. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>loan_to_trek</code><span class="type"><code>(trek, quantity)</code></span></td><td data-label="מטרה">משאילה כמות לטיול, אחרי כל הבדיקות</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>; טיול שבוטל או הושלם; כמות שאינה מספר שלם חיובי; השאלה שנייה לאותו טיול; כמות מעבר לפנוי בתאריכי הטיול</td></tr>
+          <tr><td class="name"><code>return_from_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מסירה את ההשאלה של טיול ומחזירה את הכמות שהוחזרה</td><td data-label="מוגנת מ">מזהה של טיול שאין לו השאלה מהפריט הזה</td></tr>
+          <tr><td class="name"><code>is_loaned_to</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם הפריט מושאל לטיול</td><td data-label="מוגנת מ">בדיקה של ציוד שלא שייך לטיול. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>can_supply</code><span class="type"><code>(trek_id, start_date, duration_days)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם ההשאלה של הטיול עדיין מספיקה בתאריכים האלה, בלי לספור אותה עצמה. <code>set_dates</code> קוראת לה לפני ההזזה</td><td data-label="מוגנת מ">טיול בלי השאלה; תאריכים לא תקינים; ספירה של הטיול מול עצמו. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>find_conflicts</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מחזירה את מזהי הטיולים שבתאריכים שלהם הושאל יותר מהמלאי. זה יכול לקרות רק אחרי <code>set_dates</code> שלא קיבלה את הפריט הזה ברשימה</td><td data-label="מוגנת מ">קריסה כשאין השאלות, שמחזירה רשימה ריקה; ספירה של טיול שבוטל או הושלם. לא משנה מצב</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>כל השאלה מפנה ל-<code>Trek</code> אמיתי, עם כמות חיובית</td></tr>
+        <tr><td class="name">עקביות</td><td>תאריכים וסטטוס נקראים מהטיול, ולא נשמר עותק שלהם</td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td>בכל יום, סך ההשאלות לא עובר את <code>total_quantity</code> בזמן ההשאלה; טיול אחד מקבל השאלה אחת מכל פריט</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td>הכמות הפנויה מחושבת בכל קריאה, אז ביטול טיול מפנה ציוד מיד</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>החישוב ברמת היום, כולל יום הסיום, כדי ששתי השאלות שלא נפגשות לא ייספרו יחד</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>מזהה וכמויות הם מספרים שלמים וחיוביים, ושם לא ריק</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>השאלה מעבר למלאי, או השאלה שנייה לאותו טיול.</li>
+        <li>השאלה לטיול שבוטל, או החזרה מטיול שאין לו השאלה.</li>
+        <li>טיול שמתבטל: הציוד מתפנה בלי קריאה ל-<code>return_from_trek</code>.</li>
+        <li><code>set_dates</code> עם ציוד שלא מספיק בתאריכים החדשים: נדחית, והתאריכים נשארים כשהיו.</li>
+        <li><code>set_dates</code> בלי רשימת הציוד, לתאריך עמוס: <code>find_conflicts</code> מדווחת עליו.</li>
+      </ul>
+    </div>
+
+    <h3><code>Transport</code></h3>
+    <p><strong>אחריות:</strong> רכב שמשויך לטיולים ומביא את המשתתפים לנקודת הזינוק. נקודת האיסוף נקבעת לכל טיול בנפרד.</p>
+
+    <div class="block">
+      <h3>איך מממשים כאן OOP</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">כימוס, בגרסת התרגול</td><td>השדות ציבוריים, ו-<code>assignments</code> משתנה רק דרך <code>assign_to_trek</code> ו-<code>remove_from_trek</code></td></tr>
+        <tr><td class="name">הרכבה ("מחזיק ב")</td><td>כל שיוך מחזיק הפניה ל-<code>Trek</code> ונקודת איסוף. הרכב אינו סוג של טיול</td></tr>
+        <tr><td class="name">שמות משותפים</td><td><code>is_available</code> עם אותה חתימה כמו ב-<code>Traveler</code> וב-<code>Guide</code></td></tr>
+        <tr><td class="name">שימוש חוזר</td><td>החפיפה מ-<code>Trek.overlaps</code>, ובדיקת התאריכים מ-<code>Trek.check_dates</code></td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>שדות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שדה וסוג נתונים</th><th>מה הוא מתאר</th><th>ממה הוא מוגן</th><th>איך זה נאכף</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><code>transport_id</code><span class="type"><code>int</code></span></td><td data-label="מתאר">המזהה של הרכב</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>, אפס ומספר שלילי</td><td data-label="נאכף">בנאי: <code>type is int</code> וגדול מ-0</td></tr>
+          <tr><td class="name"><code>vehicle_type</code><span class="type"><code>str</code></span></td><td data-label="מתאר">סוג הרכב, כמו "מיניבוס"</td><td data-label="מוגן מ">סוג שאינו מחרוזת; ערך ריק או רווחים בלבד</td><td data-label="נאכף">בנאי: <code>type is str</code> ו-<code>strip()</code></td></tr>
+          <tr><td class="name"><code>seats</code><span class="type"><code>int</code>, לפחות 2</span></td><td data-label="מתאר">מספר המקומות ברכב, כולל המדריך</td><td data-label="מוגן מ">טקסט, שבר, <code>True</code>; רכב שאין בו מקום למדריך ולמשתתף אחד</td><td data-label="נאכף">בנאי: <code>type is int</code> ולפחות 2 <span class="pill warn">הנחה</span></td></tr>
+          <tr><td class="name"><code>assignments</code><span class="type"><code>list</code> של <code>dict</code></span></td><td data-label="מתאר">השיוכים, כל אחד עם <code>trek</code> ו-<code>pickup_point</code></td><td data-label="מוגן מ">שיתוף רשימה בין רכבים; שיוך לשני טיולים חופפים; שיוך כפול לאותו טיול</td><td data-label="נאכף">נוצרת ריקה ב-<code>__init__</code>. משתנה רק דרך <code>assign_to_trek</code> ו-<code>remove_from_trek</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h3>שיטות</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th class="method">שיטה</th><th>מטרה</th><th>ממה היא מוגנת</th></tr></thead>
+        <tbody>
+          <tr data-kind="ctor"><td class="name"><code>__init__</code><span class="type">הבנאי</span></td><td data-label="מטרה">יוצר רכב תקין בלי שיוכים</td><td data-label="מוגנת מ">כל ערך לא תקין ברשימת השדות, לפני ההשמות</td></tr>
+          <tr><td class="name"><code>is_available</code><span class="type"><code>(start_date, duration_days, ignore_trek_id=None)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם אין חפיפה עם טיול פעיל ששויך לרכב</td><td data-label="מוגנת מ">תאריכים לא תקינים, דרך <code>Trek.check_dates</code>; ספירה של טיול שבוטל או הושלם. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>assign_to_trek</code><span class="type"><code>(trek, pickup_point)</code></span></td><td data-label="מטרה">משייכת את הרכב לטיול, עם נקודת האיסוף שלו</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code>; טיול שבוטל או הושלם; נקודת איסוף ריקה; שיוך כפול לאותו טיול; רכב תפוס בתאריכים האלה. מותר כמה רכבים לטיול, ולכן מספר המקומות נבדק ב-<code>has_enough_seats</code></td></tr>
+          <tr><td class="name"><code>is_assigned_to</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם הרכב משויך לטיול</td><td data-label="מוגנת מ">ספירה או בדיקה של רכב שלא משרת את הטיול. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>has_enough_seats</code><span class="type"><code>(trek, vehicles)</code></span></td><td data-label="מטרה">מחזירה <code>True</code> אם סך המקומות ברכבי הטיול מספיק ל-<code>max_participants</code> ולמדריך <span class="pill warn">הנחה</span>. סטטית, כי רכב אחד לא מכיר את האחרים. היא מדווחת ולא חוסמת</td><td data-label="מוגנת מ">אובייקט שאינו <code>Trek</code> או <code>Transport</code>; קלט שאינו רשימה; רכב שמופיע פעמיים או לא משויך לטיול, שהיה מנפח את הסכום. רשימה ריקה מחזירה <code>False</code>. לא משנה מצב</td></tr>
+          <tr><td class="name"><code>remove_from_trek</code><span class="type"><code>(trek_id)</code></span></td><td data-label="מטרה">מסירה את השיוך של טיול</td><td data-label="מוגנת מ">מזהה של טיול שלא משויך לרכב</td></tr>
+          <tr><td class="name"><code>find_conflicts</code><span class="type"><code>()</code></span></td><td data-label="מטרה">מחזירה זוגות של מזהי טיולים חופפים ברכב. זה יכול לקרות רק אחרי <code>set_dates</code> שלא קיבלה את הרכב הזה ברשימה</td><td data-label="מוגנת מ">קריסה כשאין שיוכים, שמחזירה רשימה ריקה; ספירה של טיול שבוטל או הושלם. לא משנה מצב</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note"><strong>הכלל:</strong> לטיול יכולים להיות כמה רכבים, אבל רכב לא יכול לשרת שני טיולים חופפים. מחסור במקומות לא נחסם בזמן השיוך, כי הרכבים משויכים אחד אחד, ו-<code>has_enough_seats</code> בודקת את הסכום אחרי שכולם שויכו.</p>
+    </div>
+
+    <div class="block">
+      <h3>ששת העקרונות</h3>
+      <div class="table-wrap"><table class="stack"><tbody>
+        <tr><td class="name method">שלמות נתונים</td><td>כל שיוך מפנה ל-<code>Trek</code> אמיתי, עם נקודת איסוף לא ריקה</td></tr>
+        <tr><td class="name">עקביות</td><td>תאריכים, סטטוס ומספר מקומות נדרש נקראים מהטיול, ולא נשמר עותק שלהם</td></tr>
+        <tr><td class="name">עמידה באילוצים</td><td>אין שני טיולים חופפים ברכב, גם בשיוך וגם בהזזה עם רשימת הרכבים; סך המקומות נבדק מול <code>max_participants</code> והמדריך</td></tr>
+        <tr><td class="name">עדכניות נתונים</td><td>הזמינות מחושבת בכל קריאה, אז ביטול טיול מפנה את הרכב מיד</td></tr>
+        <tr><td class="name">דיוק נתונים</td><td>יום הסיום נספר, כמו בכל חישובי החפיפה; <code>find_conflicts</code> מחזירה כל זוג פעם אחת</td></tr>
+        <tr><td class="name">ולידציית נתונים</td><td>מזהה שלם וחיובי, <code>seats</code> לפחות 2, סוג רכב ונקודת איסוף לא ריקים</td></tr>
+      </tbody></table></div>
+    </div>
+
+    <div class="block">
+      <h3>דחיות להדגמה</h3>
+      <ul>
+        <li>שיוך רכב לטיול שחופף לטיול אחר שלו.</li>
+        <li>שני רכבים לטיול אחד: <code>has_enough_seats</code> מחזירה <code>False</code> כשחסר מקום, גם רק למדריך.</li>
+        <li><code>set_dates</code> עם רכב שתפוס בתאריכים החדשים: נדחית, והתאריכים נשארים כשהיו.</li>
+        <li>שיוך כפול לאותו טיול, או נקודת איסוף ריקה.</li>
+        <li>טיול שמתבטל: הרכב מתפנה בלי קריאה ל-<code>remove_from_trek</code>.</li>
+        <li><code>set_dates</code> בלי רשימת הרכבים, על טיול אחר של הרכב: <code>find_conflicts</code> מדווחת על הזוג.</li>
+      </ul>
     </div>
   </section>
   </div>
