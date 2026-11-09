@@ -27,7 +27,7 @@ Field Trek Agency/
   transport.py   Transport: vehicles assigned to treks
   tests.py       Demonstrations of every class and method
 docs/
-  trek_protocol_pages.html   Work protocol, in Hebrew
+  trek_protocol_pages.html   Work protocol and the decisions on its open questions, in Hebrew
   tests_overview.md          What tests.py checks, in Hebrew
 .claude/skills/course-oop/   OOP rules used while writing the code
 ```
@@ -108,6 +108,9 @@ The assignment leaves these open, and they can be changed.
 
 | Topic | Choice |
 | --- | --- |
+| Today's date | Always the real `date.today()`. Demonstrations move a trek's dates, never today. `calculate_refund_rate` and `complete_trek` take an optional date that defaults to today |
+| Past dates | A trek can be created with a past date, but nobody can register to a trek that has departed |
+| Inheritance | `Traveler` and `Guide` have no shared `Person` base class |
 | Refund by days before departure | 30 or more: 100%. 14 to 29: 75%. 7 to 13: 50%. Fewer: 0% |
 | Membership discount | Basic 0%, annual 10%, premium 20% |
 | Waiting list order | Premium, then annual, then basic, and by arrival within each type |
