@@ -10,10 +10,10 @@ This is coursework for the Simulation course. The final submission is a Colab no
 | --- | --- |
 | `Trek`, `Traveler`, `Guide`, `Agency` | Written |
 | `Equipment`, `Transport` (extension) | Written |
-| `tests.py` | Empty, the demonstrations are still to be written |
+| `tests.py` | Written: demonstrations of every class and method, see `docs/tests_overview.md` |
 | Colab notebook | Not started |
 
-The classes were checked with scripts kept outside this repository, so nothing here runs automatically yet.
+Run `python tests.py` from inside `Field Trek Agency` to see every demonstration and a summary of the results.
 
 ## Project layout
 
@@ -25,9 +25,10 @@ Field Trek Agency/
   agency.py      Agency: repositories, search, reports
   equipment.py   Equipment: stock lent to treks by date
   transport.py   Transport: vehicles assigned to treks
-  tests.py       Empty placeholder
+  tests.py       Demonstrations of every class and method
 docs/
   trek_protocol_pages.html   Work protocol, in Hebrew
+  tests_overview.md          What tests.py checks, in Hebrew
 .claude/skills/course-oop/   OOP rules used while writing the code
 ```
 
@@ -111,6 +112,8 @@ The assignment leaves these open, and they can be changed.
 | Membership discount | Basic 0%, annual 10%, premium 20% |
 | Waiting list order | Premium, then annual, then basic, and by arrival within each type |
 | Scales | Difficulty, experience and certification all run from 1 to 10 |
+| Traveler's age | A whole number from 1 to 120 |
+| Guide's specialties | Each region appears once |
 | Guide's monthly limit | Counted by departure month |
 | Private tour | Costs 500 per day, in the guide's first specialty, at the traveler's experience level |
 | Seasons | By departure month: winter December to February, spring March to May, summer June to August, autumn September to November |
