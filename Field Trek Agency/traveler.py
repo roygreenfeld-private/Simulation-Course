@@ -15,7 +15,8 @@ class Traveler:
             raise ValueError(f"Invalid traveler id: {traveler_id}")
         if type(name) is not str or not name.strip():
             raise ValueError(f"Invalid name: {name}")
-        if type(age) is not int or age<=0:
+        # Assumption: 120 is the highest realistic age
+        if type(age) is not int or not 1<=age<=120:
             raise ValueError(f"Invalid age: {age}")
         if membership_type not in Traveler.VALID_MEMBERSHIPS:
             raise ValueError(f"Invalid membership type: {membership_type}")

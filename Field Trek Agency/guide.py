@@ -14,6 +14,9 @@ class Guide:
         for region in specialties:
             if region not in Trek.VALID_REGIONS:
                 raise ValueError(f"Invalid region: {region}")
+        # A region listed twice would count twice in the guide's specialties
+        if len(set(specialties))!=len(specialties):
+            raise ValueError(f"Duplicate region in specialties: {specialties}")
         # Assumption: certification uses a 1 to 10 scale, the assignment does not define one
         if type(certification_level) is not int or not 1<=certification_level<=10:
             raise ValueError(f"Invalid certification level: {certification_level}")
