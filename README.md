@@ -18,10 +18,7 @@ Run these from inside `Field Trek Agency`:
 
 ```text
 python tests.py              Demonstrations of every class and method, with a summary
-python simulation.py         The simulation; a menu asks for the mode
-python simulation.py season  The full season scenario, with no input
-python simulation.py menu    The interactive menu
-python simulation.py edge    All edge case scenarios
+python simulation.py         The simulation: a start menu offers season, menu and edge, and returns after each one
 ```
 
 ## Project layout
