@@ -3,7 +3,7 @@ from trek import Trek
 
 
 class Guide:
-    # Creates a valid guide with no treks; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates a valid guide with no treks; an invalid value raises ValueError before any field is set
     def __init__(self, guide_id, name, specialties, certification_level, experience_years, max_monthly_treks):
         if type(guide_id) is not int or guide_id<=0:
             raise ValueError(f"Invalid guide id: {guide_id}")
@@ -14,7 +14,10 @@ class Guide:
         for region in specialties:
             if region not in Trek.VALID_REGIONS:
                 raise ValueError(f"Invalid region: {region}")
-        # Assumption: certification uses a 1 to 10 scale, the assignment does not define one
+        # A region listed twice would count twice in the guide's specialties
+        if len(set(specialties))!=len(specialties):
+            raise ValueError(f"Duplicate region in specialties: {specialties}")
+        # Assumption: certification uses a 1 to 10 scale
         if type(certification_level) is not int or not 1<=certification_level<=10:
             raise ValueError(f"Invalid certification level: {certification_level}")
         # A whole number is also accepted, as with a trek's price, and is kept as a float below

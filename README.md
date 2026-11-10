@@ -10,10 +10,16 @@ This is coursework for the Simulation course. The final submission is a Colab no
 | --- | --- |
 | `Trek`, `Traveler`, `Guide`, `Agency` | Written |
 | `Equipment`, `Transport` (extension) | Written |
-| `tests.py` | Empty, the demonstrations are still to be written |
+| `tests.py` | Written: demonstrations of every class and method, see `docs/tests_overview.md` |
+| `simulation.py` | Written: a season scenario, an interactive menu and edge case scenarios, see `docs/simulation_overview.md` |
 | Colab notebook | Not started |
 
-The classes were checked with scripts kept outside this repository, so nothing here runs automatically yet.
+Run these from inside `Field Trek Agency`:
+
+```text
+python tests.py              Demonstrations of every class and method, with a summary
+python simulation.py         The simulation: a start menu offers season, menu and edge, and returns after each one
+```
 
 ## Project layout
 
@@ -25,9 +31,12 @@ Field Trek Agency/
   agency.py      Agency: repositories, search, reports
   equipment.py   Equipment: stock lent to treks by date
   transport.py   Transport: vehicles assigned to treks
-  tests.py       Empty placeholder
+  tests.py       Demonstrations of every class and method
+  simulation.py  The main file: season scenario, interactive menu, edge cases
 docs/
-  trek_protocol_pages.html   Work protocol, in Hebrew
+  trek_protocol_pages.html   Work protocol and the decisions on its open questions, in Hebrew
+  tests_overview.md          What tests.py checks, in Hebrew
+  simulation_overview.md     How simulation.py is built and run, in Hebrew
 .claude/skills/course-oop/   OOP rules used while writing the code
 ```
 
@@ -107,10 +116,15 @@ The assignment leaves these open, and they can be changed.
 
 | Topic | Choice |
 | --- | --- |
+| Today's date | Always the real `date.today()`. Demonstrations move a trek's dates, never today. `calculate_refund_rate` and `complete_trek` take an optional date that defaults to today |
+| Past dates | A trek can be created with a past date, but nobody can register to a trek that has departed |
+| Inheritance | `Traveler` and `Guide` have no shared `Person` base class |
 | Refund by days before departure | 30 or more: 100%. 14 to 29: 75%. 7 to 13: 50%. Fewer: 0% |
 | Membership discount | Basic 0%, annual 10%, premium 20% |
 | Waiting list order | Premium, then annual, then basic, and by arrival within each type |
 | Scales | Difficulty, experience and certification all run from 1 to 10 |
+| Traveler's age | A whole number from 1 to 120 |
+| Guide's specialties | Each region appears once |
 | Guide's monthly limit | Counted by departure month |
 | Private tour | Costs 500 per day, in the guide's first specialty, at the traveler's experience level |
 | Seasons | By departure month: winter December to February, spring March to May, summer June to August, autumn September to November |
@@ -120,6 +134,6 @@ The assignment leaves these open, and they can be changed.
 ## Known limitations
 
 - `Trek` has no field for vehicles or equipment, so `set_dates` checks only the ones passed to it. Anything left out is not checked, and its `find_conflicts` method reports the clash after the move.
-- `Agency` has no field for vehicles or equipment, so the calling code keeps those objects and their ids unique.
+- `Agency` has no field for vehicles or equipment, so the calling code keeps those objects and their ids unique. In `simulation.py`, `AgencySimulation` keeps them.
 - `Agency.add_trek` checks the trek's guide only when the trek is added. A guide assigned later is not checked against the repository.
 - A private tour appears in the agency's reports only after `add_trek` is called for it.

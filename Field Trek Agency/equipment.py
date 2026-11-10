@@ -3,7 +3,7 @@ from trek import Trek
 
 
 class Equipment:
-    # Creates a valid equipment item with no loans; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates a valid equipment item with no loans; an invalid value raises ValueError before any field is set
     def __init__(self, equipment_id, name, total_quantity):
         if type(equipment_id) is not int or equipment_id<=0:
             raise ValueError(f"Invalid equipment id: {equipment_id}")

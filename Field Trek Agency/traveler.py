@@ -4,18 +4,19 @@ from trek import Trek
 class Traveler:
     # The only membership types a traveler can have
     VALID_MEMBERSHIPS=("basic", "annual", "premium")
-    # Assumption: the discount rate of each membership type; the rates are our choice
+    # Assumption: the discount rate of each membership type
     MEMBERSHIP_DISCOUNTS={"basic": 0.0, "annual": 0.1, "premium": 0.2}
     # Assumption: a private tour costs a fixed amount per day, because request_private_tour receives no price
     PRIVATE_TOUR_DAILY_PRICE=500
 
-    # Creates a valid traveler with no treks; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates a valid traveler with no treks; an invalid value raises ValueError before any field is set
     def __init__(self, traveler_id, name, age, membership_type, experience_level):
         if type(traveler_id) is not int or traveler_id<=0:
             raise ValueError(f"Invalid traveler id: {traveler_id}")
         if type(name) is not str or not name.strip():
             raise ValueError(f"Invalid name: {name}")
-        if type(age) is not int or age<=0:
+        # Assumption: 120 is the highest realistic age
+        if type(age) is not int or not 1<=age<=120:
             raise ValueError(f"Invalid age: {age}")
         if membership_type not in Traveler.VALID_MEMBERSHIPS:
             raise ValueError(f"Invalid membership type: {membership_type}")

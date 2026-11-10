@@ -5,7 +5,7 @@ from guide import Guide
 
 
 class Agency:
-    # Creates an agency with empty repositories; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates an agency with empty repositories; an invalid value raises ValueError before any field is set
     def __init__(self, name):
         if type(name) is not str or not name.strip():
             raise ValueError(f"Invalid name: {name}")

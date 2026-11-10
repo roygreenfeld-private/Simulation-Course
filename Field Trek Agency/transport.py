@@ -2,7 +2,7 @@ from trek import Trek
 
 
 class Transport:
-    # Creates a valid vehicle with no assignments; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates a valid vehicle with no assignments; an invalid value raises ValueError before any field is set
     def __init__(self, transport_id, vehicle_type, seats):
         if type(transport_id) is not int or transport_id<=0:
             raise ValueError(f"Invalid transport id: {transport_id}")
@@ -61,7 +61,7 @@ class Transport:
                 return True
         return False
 
-    # Returns True if the trek's vehicles together seat everyone; static because one vehicle does not know the others, a deliberate step beyond the tutorial
+    # Returns True if the trek's vehicles together seat everyone; static, because one vehicle does not know the others
     @staticmethod
     def has_enough_seats(trek, vehicles):
         if not isinstance(trek, Trek):
