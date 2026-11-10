@@ -18,7 +18,7 @@ python tests.py
 | `REJECTED` | הפעולה נדחתה כמצופה. מופיעה גם הסיבה שהמחלקה החזירה |
 | `FAILED` | משהו התנהג לא כמצופה. בהרצה תקינה אין שורות כאלה |
 
-בסוף ההרצה מודפס סיכום, למשל `181 checks behaved as expected, 0 did not`.
+בסוף ההרצה מודפס סיכום, למשל `186 checks behaved as expected, 0 did not`.
 
 ## עקרונות
 
@@ -35,9 +35,9 @@ python tests.py
 | 2. Trek: מדריך ותאריכים | `assign_guide` ו-`Guide.assign_trek`: מדריך שני, אזור לא מתאים, מדריך תפוס, מגבלה חודשית. `set_dates`: הזזה תקינה, התנגשות עם מדריך או משתתף, ובהזזה שנדחתה התאריכים הישנים נשמרים |
 | 3. Trek: רישום ורשימת המתנה | `has_capacity`, `is_suitable` (כולל רמה שווה), `register` ו-`register_to_trek`: טיול מלא, רישום כפול, רמה לא מתאימה, התנגשות בלוח הזמנים, טיול שיצא. `add_to_waiting_list`, `cancel_registration`, ו-`promote_from_waiting_list` שמקדם premium לפני basic שהגיע קודם. `update_status` בשני הכיוונים |
 | 4. Trek: החזרים, ביטול וסיום | `calculate_refund_rate` בכל ארבע המדרגות ובגבולות 30 ו-7 ימים. `Traveler.cancel_trek` שמחזיר את שיעור ההחזר. `cancel_trek` שמשחרר משתתפים, רשימת המתנה ומדריך. `complete_trek` ו-`add_completed_trek`: לפני הסיום, פעמיים, טיול שלא אושר |
-| 5. Traveler | `is_available`. `request_private_tour`: טיול תקין עם האזור, הרמה והמחיר שהנחנו, ודחייה של מדריך תפוס, מטייל תפוס, תאריך עבר ואובייקט שאינו מדריך. `generate_payment_report` עם הנחת מנוי ודמי ביטול |
-| 6. Guide | `is_available`, `analyze_guiding_statistics` (טיולים שהושלמו, טיולים עתידיים, תפוסה ממוצעת, אזורים), ו-`remove_trek`, כולל דחייה של טיול שהושלם |
-| 7. Agency | `add_guide`, `add_traveler` ו-`add_trek`: מזהה כפול, טיפוס שגוי, ומדריך שלא שייך לסוכנות. `search_treks` לפי שם, אזור, שם מדריך ורמת קושי. `generate_season_schedule_report` עם התרעה על חפיפה באותו אזור, ו-`generate_membership_report` |
+| 5. Traveler | `is_available`. `request_private_tour`: טיול תקין עם האזור, הרמה והמחיר שהנחנו, ודחייה של מדריך תפוס, מטייל תפוס, תאריך עבר ואובייקט שאינו מדריך. `generate_payment_report` עם הנחת מנוי ודמי ביטול, ודוח של מטייל בלי טיולים |
+| 6. Guide | `is_available`, `analyze_guiding_statistics` (טיולים שהושלמו, טיולים עתידיים, תפוסה ממוצעת, אזורים), ו-`remove_trek`, כולל דחייה של טיול שהושלם. סטטיסטיקה של מדריך בלי טיולים, בלי חלוקה באפס |
+| 7. Agency | `add_guide`, `add_traveler` ו-`add_trek`: מזהה כפול, טיפוס שגוי, ומדריך שלא שייך לסוכנות. `search_treks` לפי שם, אזור, שם מדריך ורמת קושי. `generate_season_schedule_report` עם התרעה על חפיפה באותו אזור, ו-`generate_membership_report`. דוחות וחיפוש על סוכנות ריקה |
 | 8. Equipment | השאלה, כמות פנויה לפי היום העמוס, השאלה מעבר למלאי, השאלה כפולה, `can_supply`, `set_dates` שבודקת ציוד, `find_conflicts` אחרי הזזה, ציוד שמשתחרר כשטיול מבוטל, והחזרה |
 | 9. Transport | שיבוץ רכב, רכב תפוס, נקודת איסוף ריקה, טיול מבוטל, `has_enough_seats` (מושב למדריך, רכב כפול, רכב לא משובץ), `set_dates` שבודקת רכבים, `find_conflicts` ו-`remove_from_trek` |
 
