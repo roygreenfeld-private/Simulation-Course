@@ -330,6 +330,9 @@ expect_rejected("an object that is not a guide", lambda: make_traveler(43).reque
 
 print("\ngenerate_payment_report (premium has 20% off; the fee is what a cancellation today would cost)")
 pprint(traveler.generate_payment_report(), sort_dicts=False)
+newcomer=make_traveler(44)
+report=newcomer.generate_payment_report()
+expect_equal("payment report of a traveler with no treks", (report["treks"], report["total"]), ([], 0))
 
 
 # ======================================================================
@@ -352,6 +355,9 @@ expect_equal("busy on the trek dates", guide.is_available(days_from_today(30), 2
 
 print("\nanalyze_guiding_statistics (completed treks, upcoming treks, average occupancy, regions)")
 pprint(guide.analyze_guiding_statistics(), sort_dicts=False)
+stats=make_guide(51).analyze_guiding_statistics()
+expect_equal("statistics of a guide with no treks, with no division by zero",
+             (stats["completed_treks"], stats["upcoming_treks"], stats["average_occupancy"], stats["regions"]), (0, 0, 0, {}))
 
 print("\nremove_trek")
 expect_ok("remove the upcoming trek", lambda: guide.remove_trek(50))
@@ -404,6 +410,13 @@ pprint(agency.generate_season_schedule_report(), sort_dicts=False)
 
 print("\ngenerate_membership_report")
 pprint(agency.generate_membership_report(), sort_dicts=False)
+
+print("\nreports and search on an empty agency")
+empty=Agency("Empty Agency")
+expect_equal("season schedule", empty.generate_season_schedule_report(), {"agency": "Empty Agency", "seasons": {}, "warnings": []})
+membership=empty.generate_membership_report()
+expect_equal("membership report totals", (membership["total_travelers"], membership["active_travelers"], membership["expected_income"]), (0, 0, 0))
+expect_equal("search", empty.search_treks("Negev"), [])
 
 
 # ======================================================================
