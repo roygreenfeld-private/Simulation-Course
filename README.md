@@ -11,9 +11,18 @@ This is coursework for the Simulation course. The final submission is a Colab no
 | `Trek`, `Traveler`, `Guide`, `Agency` | Written |
 | `Equipment`, `Transport` (extension) | Written |
 | `tests.py` | Written: demonstrations of every class and method, see `docs/tests_overview.md` |
+| `simulation.py` | Written: a season scenario, an interactive menu and edge case scenarios, see `docs/simulation_overview.md` |
 | Colab notebook | Not started |
 
-Run `python tests.py` from inside `Field Trek Agency` to see every demonstration and a summary of the results.
+Run these from inside `Field Trek Agency`:
+
+```text
+python tests.py              Demonstrations of every class and method, with a summary
+python simulation.py         The simulation; a menu asks for the mode
+python simulation.py season  The full season scenario, with no input
+python simulation.py menu    The interactive menu
+python simulation.py edge    All edge case scenarios
+```
 
 ## Project layout
 
@@ -26,9 +35,11 @@ Field Trek Agency/
   equipment.py   Equipment: stock lent to treks by date
   transport.py   Transport: vehicles assigned to treks
   tests.py       Demonstrations of every class and method
+  simulation.py  The main file: season scenario, interactive menu, edge cases
 docs/
   trek_protocol_pages.html   Work protocol and the decisions on its open questions, in Hebrew
   tests_overview.md          What tests.py checks, in Hebrew
+  simulation_overview.md     How simulation.py is built and run, in Hebrew
 .claude/skills/course-oop/   OOP rules used while writing the code
 ```
 
@@ -126,6 +137,6 @@ The assignment leaves these open, and they can be changed.
 ## Known limitations
 
 - `Trek` has no field for vehicles or equipment, so `set_dates` checks only the ones passed to it. Anything left out is not checked, and its `find_conflicts` method reports the clash after the move.
-- `Agency` has no field for vehicles or equipment, so the calling code keeps those objects and their ids unique.
+- `Agency` has no field for vehicles or equipment, so the calling code keeps those objects and their ids unique. In `simulation.py`, `AgencySimulation` keeps them.
 - `Agency.add_trek` checks the trek's guide only when the trek is added. A guide assigned later is not checked against the repository.
 - A private tour appears in the agency's reports only after `add_trek` is called for it.
