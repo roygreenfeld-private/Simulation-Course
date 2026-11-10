@@ -12,7 +12,7 @@ This is coursework for the Simulation course. The final submission is a Colab no
 | `Equipment`, `Transport` (extension) | Written |
 | `tests.py` | Written: demonstrations of every class and method, see `docs/tests_overview.md` |
 | `simulation.py` | Written: a season scenario, an interactive menu and edge case scenarios, see `docs/simulation_overview.md` |
-| Colab notebook | Not started |
+| Colab notebook | Written: Field_Trek_Agency.ipynb |
 
 Run these from inside `Field Trek Agency`:
 
