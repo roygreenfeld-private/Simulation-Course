@@ -1,4 +1,3 @@
-import sys
 from datetime import date, timedelta
 from trek import Trek
 from traveler import Traveler
@@ -782,7 +781,7 @@ class AgencySimulation:
                 else:
                     number+=1
                     print(f"  {number:>2}. {label}")
-            print("   0. Exit")
+            print("   0. Back to the start menu")
             try:
                 choice=input("choice: ").strip()
                 if choice=="0":
@@ -800,28 +799,38 @@ class AgencySimulation:
                 return
 
 
-# Runs the simulation; a mode can also be given on the command line: season, menu or edge
+    # ------------------------------------------------------------------
+    # Start menu
+    # ------------------------------------------------------------------
+
+    # Shows the start menu and runs the chosen mode, then returns to it; 0, or input that ends, exits
+    def run(self):
+        while True:
+            print("\nField trek agency simulation")
+            print("  1. season  Full season scenario, runs on its own")
+            print("  2. menu    Interactive menu")
+            print("  3. edge    All edge case scenarios")
+            print("  0. exit")
+            try:
+                mode=input("choice: ").strip().lower()
+            except EOFError:
+                print("\nno more input, the simulation ends")
+                return
+            if mode in ("1", "season"):
+                self.run_season_scenario()
+            elif mode in ("2", "menu"):
+                self.run_menu()
+            elif mode in ("3", "edge"):
+                self.run_all_edge_cases()
+            elif mode in ("0", "exit"):
+                return
+            else:
+                print("  please choose 1, 2, 3 or 0, or type season, menu, edge or exit")
+
+
+# Runs the simulation from its start menu
 def main():
-    simulation=AgencySimulation()
-    if len(sys.argv)>1:
-        mode=sys.argv[1]
-    else:
-        print("Field trek agency simulation")
-        print("  1. Full season scenario (runs on its own)")
-        print("  2. Interactive menu")
-        print("  3. All edge case scenarios")
-        try:
-            mode=input("choice: ").strip()
-        except EOFError:
-            mode="1"
-    if mode in ("1", "season"):
-        simulation.run_season_scenario()
-    elif mode in ("2", "menu"):
-        simulation.run_menu()
-    elif mode in ("3", "edge"):
-        simulation.run_all_edge_cases()
-    else:
-        print("Unknown mode. Use 1 / season, 2 / menu or 3 / edge")
+    AgencySimulation().run()
 
 
 if __name__=="__main__":
