@@ -90,7 +90,7 @@ print("\nTrek")
 trek=expect_ok("valid trek", lambda: make_trek(1, 40))
 print(f"            new trek starts empty: status={trek.status}, guide={trek.guide}, "
       f"participants={trek.participants}, waiting_list={trek.waiting_list}")
-expect_ok("trek in the past is allowed (decision of open question 2)", lambda: make_trek(2, -30))
+expect_ok("trek with a past date is allowed; registration to it is not", lambda: make_trek(2, -30))
 expect_rejected("id 0", lambda: Trek(0, "A", "Negev", 3, 1, 5, days_from_today(10), 2, 100))
 expect_rejected("id as text", lambda: Trek("1", "A", "Negev", 3, 1, 5, days_from_today(10), 2, 100))
 expect_rejected("empty name", lambda: Trek(1, "   ", "Negev", 3, 1, 5, days_from_today(10), 2, 100))

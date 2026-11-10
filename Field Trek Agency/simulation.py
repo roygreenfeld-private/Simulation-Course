@@ -18,7 +18,7 @@ class AgencySimulation:
     def __init__(self):
         # The agency, with its travelers, guides and treks
         self.agency=None
-        # Vehicles and equipment are kept here, because Agency has no field for them (see the README)
+        # Vehicles and equipment are kept here, because Agency has no field for them
         self.vehicles=[]
         self.equipment=[]
         # Counts how the scripted steps behaved, so a scenario ends with a clear summary
@@ -172,7 +172,7 @@ class AgencySimulation:
     def get_trek_equipment(self, trek):
         return [item for item in self.equipment if item.is_loaned_to(trek.trek_id)]
 
-    # Moves a trek so it ended the given number of days ago and completes it; the dates move, today does not (open question 3)
+    # Moves a trek so it ended the given number of days ago and completes it; the trek's dates move, today does not
     def finish_trek(self, trek, ended_days_ago=1):
         if type(ended_days_ago) is not int or ended_days_ago<1:
             raise ValueError(f"Invalid number of days: {ended_days_ago}")

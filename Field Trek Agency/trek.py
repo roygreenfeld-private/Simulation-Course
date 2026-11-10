@@ -10,7 +10,7 @@ class Trek:
     # The only statuses a trek can be in
     VALID_STATUSES=("planned", "confirmed", "cancelled", "completed")
 
-    # Creates a valid trek with no guide and no participants; the class only reports an invalid value, the calling code decides how to handle it
+    # Creates a valid trek with no guide and no participants; an invalid value raises ValueError before any field is set
     def __init__(self, trek_id, name, region, difficulty_level, min_participants,
                  max_participants, start_date, duration_days, price):
         # Assumption: trek_id and difficulty_level are whole numbers
@@ -57,7 +57,7 @@ class Trek:
         # Current status, one of VALID_STATUSES, updated by update_status, cancel_trek and complete_trek
         self.status="planned"
 
-    # Validates a date range in one place; static so Traveler and Guide can use it with no trek object, a deliberate step beyond the tutorial
+    # Validates a date range in one place; static, so Traveler and Guide can use it without a trek object
     @staticmethod
     def check_dates(start_date, duration_days):
         # type() rejects datetime, because comparing it with a date raises TypeError
@@ -213,7 +213,7 @@ class Trek:
                 return
         raise ValueError(f"Traveler {traveler_id} is not registered to trek {self.trek_id}")
 
-    # Returns the refund rate between 0 and 1 by days before departure; the tiers are our choice: 30+ full, 14-29 75%, 7-13 half, else none
+    # Returns the refund rate between 0 and 1 by days before departure (assumption): 30+ days 100%, 14-29 days 75%, 7-13 days 50%, fewer 0%
     def calculate_refund_rate(self, cancel_date=None):
         # With no date the rate uses today; the optional parameter keeps results repeatable in tests
         if cancel_date is None:
